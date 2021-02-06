@@ -7,7 +7,7 @@ Software Class
 
 User-story:
 
-User named Mike creates account on music app, logs in, at dash board is asked to go to developers.spotify.com and acquire a client id and client secret
+User named Mike, for example, creates account on music app, logs in, at dash board is asked to go to developers.spotify.com and acquire a client id and client secret
 On the dash board (or in an optional settings screen), user puts the client id and client secret and clicks "save"
 Client id and secret are stored encrypted in user's row in user table
 At this point, user can search for a given artist and get:
