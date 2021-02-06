@@ -1,7 +1,7 @@
 # DjangoMusicApp
 Software Class
 
-# TODO 
+# OVERVIEW
 
 -----
 
