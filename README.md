@@ -7,11 +7,15 @@ Team Members:
 
 -----
 
-# OVERVIEW
+## OVERVIEW
 
 -----
 
-User-story:
+**Motivation:** 
+
+To allow a user to search for an artist and get not only top artist tracks, but also recommendations. 
+
+**User-story:**
 
 A user named Mike, for example, creates account on music app, logs in, at dashboard is asked to go to developers.spotify.com and acquire a client id and client secret.
 
@@ -24,9 +28,12 @@ At this point, user can search for a given artist and get:
     Top tracks returns a list in a table-format
 - Recommendations
     Returns a table of tracks
+**Developement Method:**
+- Django for web development framework
+- Python
 
 -----
-
+## Project Tracking Todo list
 1. caching the returned `artist_ids` so that we are not making redundant calls
 1a. instead of performing a web request first, instead check the cache to see if a given artist and their id exist,
     if not, then perform a web request
@@ -53,9 +60,9 @@ At this point, user can search for a given artist and get:
     Something like...
     <a href="https://myapp.com/search?q={{% artist %}}">{{% artist %}}</a> 
 
-7. CSS for the Django templates (*not required but, it is a software engineering class*)
+7. CSS for the Django templates (*not required*)
 
-8. Possible fields for getrecommendations:
+8. Possible fields for getrecommendations (*not required*):
     - Tempo
     - Energy
     - etc
@@ -63,3 +70,8 @@ At this point, user can search for a given artist and get:
 9. Encryption of user information in the database besides password
     - clientid
     - clientsecret
+## Risks/Mitigation
+
+-The time it will take to implement the technology to have a fully functional web app that generates an artist top tracks and recommendations
+-Mitigate risks by dividing tasks among group members and checking in frequently. 
+
