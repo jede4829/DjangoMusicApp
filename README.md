@@ -7,13 +7,15 @@ Team Members:
 
 -----
 
-## OVERVIEW
+## Visition Statement: 
+
+To allow a user to search for an artist and get not only top artist tracks, but also recommendations. 
 
 -----
 
 **Motivation:** 
 
-To allow a user to search for an artist and get not only top artist tracks, but also recommendations. 
+Streaming services, such as Spotify, offer APIs that allow third-party app developers to access Spofitify data and music.  It would be great to harnass a few Spotify APIs to generate not only an Artist's top tracks but also recommendations of tracks to listen to.  As such, a user would be able to look up his/her favorite artist to find the artist's top tracks and recommendations of songs to listen to, as depicted by the user story below. 
 
 **User-story:**
 
@@ -75,6 +77,7 @@ At this point, user can search for a given artist and get:
 ## Risks/Mitigation
 -----
 
-- The time it will take to implement the technology to have a fully functional web app that generates an artist top tracks and recommendations
+- The time it will take to implement the technology to have a fully functional web app that generates an artist top tracks and recommendationsand.
+-  working with Django -- understanding the web tool. 
 - Mitigate risks by dividing tasks among group members and checking in frequently. 
 -----
