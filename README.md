@@ -73,7 +73,8 @@ At this point, user can search for a given artist and get:
     - clientid
     - clientsecret
 ## Risks/Mitigation
+-----
 
--The time it will take to implement the technology to have a fully functional web app that generates an artist top tracks and recommendations
--Mitigate risks by dividing tasks among group members and checking in frequently. 
-
+- The time it will take to implement the technology to have a fully functional web app that generates an artist top tracks and recommendations
+- Mitigate risks by dividing tasks among group members and checking in frequently. 
+-----
