@@ -15,7 +15,7 @@ To allow a user to search for an artist and get not only top artist tracks, but 
 
 ## Motivation: 
 -----
-Streaming services, such as Spotify, offer APIs that allow third-party app developers to access Spofitify data and music.  It would be great to harnass a few Spotify APIs to generate not only an Artist's top tracks but also recommendations of tracks to listen to.  As such, a user would be able to look up his/her favorite artist to find the artist's top tracks and recommendations of songs to listen to, as depicted by the user story below. 
+Streaming music services, such as Spotify, offer APIs that allow third-party app developers to access Spofitify data and music.  It would be great to harnass a few Spotify APIs to generate not only an Artist's top tracks but also recommendations of tracks to listen to.  As such, a user would be able to look up his/her favorite artist to find the artist's top tracks and recommendations of songs to listen to, as depicted by the user story below. 
 
 **User-story:**
 
