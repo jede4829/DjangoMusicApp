@@ -28,6 +28,8 @@ At this point, user can search for a given artist and get:
     Top tracks returns a list in a table-format
 - Recommendations
     Returns a table of tracks
+
+
 **Developement Method:**
 - Django for web development framework
 - Python
