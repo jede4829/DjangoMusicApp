@@ -1,6 +1,4 @@
 # TITLE: DjangoMusicApp
-Software Class
-
 -----
 Team Members:
 
