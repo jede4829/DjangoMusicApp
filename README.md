@@ -1,10 +1,10 @@
 # TITLE: Music App
 -----
 Team Members:
-Sean Mccormick
-Shelby Bearrows
-Frederick Thayer
-Jenna Dean
+- Sean Mccormick
+- Shelby Bearrows
+- Frederick Thayer
+- Jenna Dean
 
 
 -----
