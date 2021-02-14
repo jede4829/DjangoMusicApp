@@ -1,4 +1,4 @@
-# TITLE: Music App
+# TITLE: Jam Jelly Music App
 -----
 Team Members:
 - Sean Mccormick
@@ -86,6 +86,8 @@ At this point, user can search for a given artist and get:
 ## Risks/Mitigation
 -----
 
+- Security risk for propering managing a user's client key and secret key
+- Scope Creep: requirements increasing at the end of the project without more time allocation. 
 - The time it will take to implement the technology to have a fully functional web app that generates an artist top tracks and recommendationsand.
 -  working with Django -- understanding the web tool. 
 - Mitigate risks by dividing tasks among group members and checking in frequently. 
@@ -94,6 +96,6 @@ At this point, user can search for a given artist and get:
 ## Project Tracking Software
 -----
 
-- Github Project
+- Trello
 
 -----
