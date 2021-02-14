@@ -1,6 +1,10 @@
-# TITLE: DjangoMusicApp
+# TITLE: Music App
 -----
 Team Members:
+Sean Mccormick
+Shelby Bearrows
+Frederick Thayer
+Jenna Dean
 
 
 -----
@@ -34,6 +38,7 @@ At this point, user can search for a given artist and get:
 -----
 ## Developement Method:
 -----
+- Scrum
 - Django for web development framework
 - Python
 
@@ -67,7 +72,7 @@ At this point, user can search for a given artist and get:
 
 6. when we get our first generation of recommendations, we want to present the user with a chance to select which songs they like the most in order to seed further calls to recommendations. We can do this by adding a number in front of each track and then asking the user to enter the numbers matching their preferred tracks.
 
-7.  Encryption of user information in the database besides password
+7.  Encryption of user information in the database besides password (*not required*)
     - clientid
     - clientsecre
 
@@ -84,4 +89,11 @@ At this point, user can search for a given artist and get:
 - The time it will take to implement the technology to have a fully functional web app that generates an artist top tracks and recommendationsand.
 -  working with Django -- understanding the web tool. 
 - Mitigate risks by dividing tasks among group members and checking in frequently. 
+-----
+
+## Project Tracking Software
+-----
+
+- Github Project
+
 -----
