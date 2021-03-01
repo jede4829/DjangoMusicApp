@@ -4,8 +4,8 @@ import json
 import pandas as pd
 from spotipy.oauth2 import SpotifyClientCredentials
 
-cid = ''
-secret = ''
+cid = '4bf3768559cb4d84b4ef2e37384030d9'
+secret = '15081679c0e04eff9422f1463cda5f23'
 client = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(client_credentials_manager=client)
 
@@ -15,7 +15,7 @@ def print_class(instance):
     for k in class_var:
         keys.append(k)
     for j in keys:
-        if type(class_var) is not str: 
+        if type(class_var) is not str:
             print(j + ' :    ' + str(class_var[j]))
         else:
             print(j + ' :    ' + class_var[j])

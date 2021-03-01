@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<center>
+		<br>
+		<br>
+		<br>
+		<form {} method="post"><h1>Submit Jelly Title Here:</h1>
+		<br>
+		{{ form.as_p }}
+		<input type ='submit' value='Save' />
+		<br>
+		</form>
+		<br>
+		<br>
+		<br>
+		<h2 {} method="get">List of Related Jellies</h2>
+		{% for music in music_objects %}
+			<p>{{ music }}</p>
+		{% endfor %}
+
+
+
+
+
+
+		<br>
+		<h2>List of Related Jams</h2>
+			<p>{{ music.title }}</p>
+		<br>
+		<h2>List of Related Albums</h2>
+		{% for album in album_objects %}
+			<p>{{ album }}</p>
+		{% endfor %}
+		<br>
+		<h2>List of Related Artists</h2>
+		{% for artist in artist_objects %}
+			<p>{{ artist }}</p>
+		{% endfor %}
+		<br>
+		<h2>List of Related Songs</h2>
+		{% for song in song_objects %}
+			<p>{{ song }}</p>
+		{% endfor %}
+		<br>
+		<h2>List of Related Tracks</h2>
+		{% for track in track_objects %}
+			<p>{{ track }}</p>
+		{% endfor %}
+		<br>
+</center>
+</body>
+</html>
