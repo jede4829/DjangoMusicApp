@@ -8,7 +8,8 @@
 <body>
 <div id="title"><b>Welcome to a custom Spotify Search!</b></div>
 
-<form id="loginform" method="POST" action="login/">
+<form id="loginform" method="POST" action="do_login/">
+{% csrf_token %}
 <table>
 <tr><td>Username:</td><td> <input type="text" id="name" name="name" value="" /></td></tr>
 <tr><td>Password:</td><td> <input type="password" id="password" name="password" value="" /></td></tr>
