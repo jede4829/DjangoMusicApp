@@ -4,7 +4,7 @@ import json
 import pandas as pd
 from spotipy.oauth2 import SpotifyClientCredentials
 
-cid = ''
+cid = '' # insert client ID and secret here
 secret = ''
 client = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(client_credentials_manager=client)
@@ -95,6 +95,54 @@ class song:
         self.track_number = 0
         self.uri = ''
 
+class track:
+    def __init__(self):
+        self.disc_number = 0
+        self.duration_ms = 0
+        self.explicit = ''
+        self.track_url = ''
+        self.href = ''
+        self.track_id = ''
+        self.is_local = ''
+        self.track_name = ''
+        self.track_number = 0
+        self.uri = ''
+
+class track_features:
+    def __init__(self):
+        self.acousticness = ''
+        self.analysis_url = ''
+        self.danceability = ''
+        self.energy = ''
+        self.id = ''
+        self.instrumentalness = ''
+        self.key = ''
+        self.liveness = ''
+        self.loudness = ''
+        self.mode = ''
+        self.speechiness = ''
+        self.tempo = ''
+        self.time_signature = ''
+        self.track_href = ''
+        self.uri = ''
+        self.valence = ''
+
+class Rec_Album:
+    def __init__(self):
+        self.artist_external_url = ''
+        self.artist_href = ''
+        self.artist_id = ''
+        self.artist_name = ''
+        self.artist_uri = ''
+        self.album_external_url = ''
+        self.album_href = ''
+        self.album_id = ''
+        self.album_images = ''
+        self.album_name = ''
+        self.album_release_date = ''
+        self.album_total_tracks = ''
+        self.album_uri = ''
+
 def Get_Albums(uri, type):
     album_titles, uris, hrefs, ids, tracks, rds, imgs = [], [], [], [], [], [], []
     album_ClassList = []
@@ -143,19 +191,6 @@ def Get_Song(track):
     song_stats.uri = single['uri']
     return song_stats
 
-class track:
-    def __init__(self):
-        self.disc_number = 0
-        self.duration_ms = 0
-        self.explicit = ''
-        self.track_url = ''
-        self.href = ''
-        self.track_id = ''
-        self.is_local = ''
-        self.track_name = ''
-        self.track_number = 0
-        self.uri = ''
-
 def Get_Album_Tracks(album_uri):
     dsc_num, dur, explicit, url, href, id, local, name, number, uri = [], [], [], [], [], [], [], [], [], []
     album_TrackList = []
@@ -190,27 +225,66 @@ def Get_Album_Tracks(album_uri):
     df = pd.DataFrame({'Disc Number':dsc_num, 'Duration':dur, 'Explicit':explicit, 'Track URL':url, 'Spotify HREF':href, 'Spotify ID':id, 'Local':local, 'Track Number':number, 'Spotify URI':uri,})
     return df, album_TrackList
 
-# 1 CHOOSE ARTIST AND PRINT CLASS
+def Album_Generator(artist_ID):
+    recommended_albums_list = []
+    recommended_albums = sp.recommendations(seed_artists = [artist_ID])
+    all_recommended_albums = recommended_albums['tracks']
+    i = 0
+    for i in range(0, len(all_recommended_albums)):
+        rec_alb = Rec_Album()
+        recommended_album = recommended_albums['tracks'][i]['album']
+        rec_alb.artist_external_url = recommended_album['artists'][0]['external_urls']['spotify']
+        rec_alb.artist_href = recommended_album['artists'][0]['href']
+        rec_alb.artist_id = recommended_album['artists'][0]['id']
+        rec_alb.artist_name = recommended_album['artists'][0]['name']
+        rec_alb.artist_uri = recommended_album['artists'][0]['uri']
+        rec_alb.album_external_url = recommended_album['external_urls']
+        rec_alb.album_href = recommended_album['href']
+        rec_alb.album_id = recommended_album['id']
+        rec_alb.album_images = recommended_album['images']
+        rec_alb.album_name = recommended_album['name']
+        rec_alb.album_release_date = recommended_album['release_date']
+        rec_alb.album_total_tracks = recommended_album['total_tracks']
+        rec_alb.album_uri = recommended_album['uri']
+        recommended_albums_list.append(rec_alb)
+        i += 1
+    return recommended_albums_list
+
+def Song_Features(single):
+    features = sp.audio_features(single)
+    track_stats = track_features()
+    track_stats.acousticness = features[0]['acousticness']
+    track_stats.danceability = features[0]['danceability']
+    track_stats.duration_ms = features[0]['duration_ms']
+    track_stats.energy = features[0]['energy']
+    track_stats.id = features[0]['id']
+    track_stats.instrumentalness = features[0]['instrumentalness']
+    track_stats.key = features[0]['key']
+    track_stats.liveness = features[0]['liveness']
+    track_stats.loudness = features[0]['loudness']
+    track_stats.mode = features[0]['mode']
+    track_stats.speechiness = features[0]['speechiness']
+    track_stats.tempo = features[0]['tempo']
+    track_stats.time_signature = features[0]['time_signature']
+    track_stats.track_href = features[0]['track_href']
+    track_stats.type = features[0]['type']
+    track_stats.uri = features[0]['uri']
+    track_stats.valence = features[0]['valence']
+    return track_stats
+
+
+# CHOOSE ARTIST AND PRINT CLASS
 # ````````````````````````````````
-artist_name = 'Metallica'
+artist_name = 'Journey'
 artist_stats = artist(artist_name)
 artist_stats.Get_Artist()
 # print_class(artist_stats)   # Remove comment to print artist profile
 
-# 2 GET ALL ALBUMS
-# ````````````````````````````````
 
-df_albums, Albums = Get_Albums(artist_stats.uri, 'album')
-# View_AllAlbums(Albums)   # Remove comment to print all albums.  Choose index for album of choice.
-
-# 3 GET SONG (all of step 4 must be commented to run step 3...for now)
-# ````````````````````````````````
-
-# track = Get_Song('brown sugar')
+track = Get_Song('Faithfully')
 # print_class(track)   # Remove comment to print song profile
 
-# 3 GET ALL SONGS FROM AN ALBUM (all of step 3 must be commented to run step 4...for now)
-# ````````````````````````````````
 
-df_tracks, Tracks = Get_Album_Tracks(Albums[0].uri)   # insert album index from step 2 here
-# View_AllTracks(Tracks)    # Remove comment to print all tracks
+song_analysis = Song_Features(track.uri)
+print_class(song_analysis)
+
