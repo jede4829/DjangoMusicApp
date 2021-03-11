@@ -8,6 +8,19 @@ from django.template  import loader
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
+
+
+
+def add(request):
+
+    val = str(request.POST["forminfo"])   ###  INSERT SPOTIFY API HERE
+
+    return render(request,"search/output.html",{"output":val})
+
+
+
+
+
 def index(request):
     return render(request, "search/index.html", {})
 
@@ -20,7 +33,7 @@ def home(request):
     if request.user.is_authenticated:
         context = {
             'user':request.user
-        } 
+        }
         return render(request, "search/home.html", context)
     else:
         raise Http404("User is not logged in!")
@@ -30,11 +43,11 @@ def home(request):
 
 def do_login(request):
     if request.method=="POST":
-        
+
         username=request.POST["name"]
         password=request.POST["password"]
 
-        user = authenticate(request, username=username, password=password ) 
+        user = authenticate(request, username=username, password=password )
         if user is not None:
             # auth'd
             login(request, user)
@@ -46,7 +59,7 @@ def do_login(request):
     raise Http404("Invalid method for page")
 
 
-    
+
 
 #return render(request, "search/home.html", {})
 
@@ -67,17 +80,17 @@ def register(request):
 
         print(f"Password: [{password}]")
         # --------------------
-        # TODO: 
+        # TODO:
         # --------------------
         # Need to actually perform registration here
         # --------------------
         try:
             user = User.objects.create_user(username, "", password)
-            user.profile.client_id=client_id 
+            user.profile.client_id=client_id
             user.profile.client_secret=client_secret
             user.save()
             context = {
-                'user':user 
+                'user':user
             }
             return render(request, "search/register.html", context)
         except Exception as e:
@@ -90,7 +103,7 @@ def check_password(password):
     PasswordMinimumLength = 8
     if password=="":
         raise Http404("Password cannot be an empty string!")
-    if len(password) < PasswordMinimumLength: 
+    if len(password) < PasswordMinimumLength:
         raise Http404(f"Password must be at least {PasswordMinimumLength} characters!")
     hasUpper = False
     hasLower = False
@@ -105,43 +118,4 @@ def check_password(password):
             hasNumeric=True
         if c in "`~!@#$%^&*()_-+=[{]}\\|;:'\",<.>/?":
             hasSpecial=True
-    return hasUpper and hasLower and hasNumeric and hasSpecial 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return hasUpper and hasLower and hasNumeric and hasSpecial

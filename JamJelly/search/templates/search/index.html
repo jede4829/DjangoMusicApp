@@ -4,7 +4,6 @@
 <title>Spotify Search Login</title>
 </head>
 
-
 <body>
 <div id="title"><b>Welcome to a custom Spotify Search!</b></div>
 
@@ -20,6 +19,22 @@
 <div>
     <a href="newuser">New User Registration</a>
 </div>
+
+<br>
+<br>
+<br>
+<br>
+
+<br>
+
+  <form action="add" method="post"><h1>Submit Jelly Title Here:</h1>
+  {% csrf_token %}
+
+  <br>
+  {{ form.as_p }} <input type ='text' name="forminfo" />
+  <input type ='submit' />
+
+<br>
 
 </body>
 </html>
