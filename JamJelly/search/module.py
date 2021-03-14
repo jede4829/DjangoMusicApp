@@ -219,6 +219,7 @@ def Get_Album_Tracks(album_uri):
 
 # 1 CHOOSE ARTIST AND PRINT CLASS
 # ````````````````````````````````
+"""
 cid = '8d97e21ce7284e4bb56d7b54df27a8b8'
 secret = '663c3435dd1e4cb097b14bd809be9c83'
 artist_name = 'Metallica'
@@ -238,5 +239,4 @@ View_AllAlbums(Albums)   # Remove comment to print all albums.  Choose index for
 # ````````````````````````````````
 df_tracks, Tracks = Get_Album_Tracks(Albums[0].uri)   # insert album index from step 2 here
 View_AllTracks(Tracks)    # Remove comment to print all tracks
-"""
 """
