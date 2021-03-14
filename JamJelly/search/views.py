@@ -8,17 +8,11 @@ from django.template  import loader
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
-
-
+from . import module
 
 def add(request):
-
     val = str(request.POST["forminfo"])   ###  INSERT SPOTIFY API HERE
-
     return render(request,"search/output.html",{"output":val})
-
-
-
 
 
 def index(request):
@@ -51,7 +45,8 @@ def do_login(request):
         if user is not None:
             # auth'd
             login(request, user)
-            return HttpResponseRedirect('/search/home')
+            #return HttpResponseRedirect('/search/home')
+            return HttpResponseRedirect('/home')
         else:
             raise Http404("Failed to login")
             # not-auth'd
@@ -61,7 +56,37 @@ def do_login(request):
 
 
 
+
+
+
+def do_search(request):
+    if request.method=="POST":
+        artist_name = request.POST["artist"]
+        client_id = request.POST["client_id"]
+        client_secret = request.POST["client_secret"]
+
+        artist_stats = module.artist(artist_name, client_id, client_secret)
+        artist_stats.Get_Artist()
+        r = module.get_str_class(artist_stats)
+
+        raise Http404(f"r: [{r}]")
+    else:
+        raise Http404("Invalid method for page")
+
 #return render(request, "search/home.html", {})
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
