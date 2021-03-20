@@ -54,40 +54,31 @@ def do_login(request):
     raise Http404("Invalid method for page")
 
 
-
-
-
-
-
 def do_search(request):
-    if request.method=="POST":
+    if request.method == "POST":
         artist_name = request.POST["artist"]
         client_id = request.POST["client_id"]
         client_secret = request.POST["client_secret"]
 
+        # Jenna, choose any or multiple of the r_'s below.  Once you are okay with this implementation I will do the rest.
+
         artist_stats = module.artist(artist_name, client_id, client_secret)
         artist_stats.Get_Artist()
-        r = module.get_str_class(artist_stats)
+        r_external_urls = module.get_str_class(artist_stats.external_urls)
+        r_uri = module.get_str_class(artist_stats.uri)
+        r_id = module.get_str_class(artist_stats.id)
+        r_spotify_name = module.get_str_class(artist_stats.spotify_name)
+        r_followers = module.get_str_class(artist_stats.followers)
+        r_genres = module.get_str_class(artist_stats.genres)
+        r_popularity = module.get_str_class(artist_stats.popularity)
+        r_href = module.get_str_class(artist_stats.href)
+        r_images = module.get_str_class(artist_stats.images)
 
         raise Http404(f"r: [{r}]")
     else:
         raise Http404("Invalid method for page")
 
 #return render(request, "search/home.html", {})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def register(request):
