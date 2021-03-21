@@ -86,7 +86,7 @@ def do_search(request):
 
     r_genres = str(artist_stats.genres).replace("[","").replace("]","")
     r_url = str(artist_stats.external_urls).replace("{'spotify': '","").replace("'}","")
-    r_image = artist_stats.images[0]
+    r_image = str(artist_stats.images[0]).split("'url': '",1)[1].split("', '",1)[0]
 
     return render(request,"search/do_search.html",{"r_name":artist_stats.spotify_name,"r_image":r_image,"r_genre":r_genres,"r_url":r_url,"r_follow":artist_stats.followers,"r_pop":artist_stats.popularity})
 
