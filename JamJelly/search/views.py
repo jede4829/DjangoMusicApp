@@ -41,6 +41,9 @@ def do_login(request):
         username=request.POST["name"]
         password=request.POST["password"]
 
+        #print(f"username: [{username}]")
+        #print(f"password: [{password}]")
+
         user = authenticate(request, username=username, password=password )
         if user is not None:
             # auth'd
@@ -50,7 +53,7 @@ def do_login(request):
         else:
             raise Http404("Failed to login")
             # not-auth'd
-        return home(request)
+        #return home(request)
     raise Http404("Invalid method for page")
 
 
