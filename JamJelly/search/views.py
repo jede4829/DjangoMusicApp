@@ -91,6 +91,11 @@ def register(request):
         client_id=request.POST["client_id"]
         client_secret=request.POST["client_secret"]
 
+        if client_id=="":
+            raise Http404("Please fill in client_id field.")
+        if client_secret=="":
+            raise Http404("Please fill in client_secret field.")
+
         if username=="":
             raise Http404("Username cannot be an empty string")
 
