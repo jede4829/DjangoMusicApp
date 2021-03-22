@@ -63,23 +63,34 @@ def do_search(request):
         client_id = request.POST["client_id"]
         client_secret = request.POST["client_secret"]
 
-        # Jenna, choose any or multiple of the r_'s below.  Once you are okay with this implementation I will do the rest.
-
         artist_stats = module.artist(artist_name, client_id, client_secret)
         artist_stats.Get_Artist()
-        r_external_urls = module.get_str_class(artist_stats.external_urls)
-        r_uri = module.get_str_class(artist_stats.uri)
-        r_id = module.get_str_class(artist_stats.id)
-        r_spotify_name = module.get_str_class(artist_stats.spotify_name)
-        r_followers = module.get_str_class(artist_stats.followers)
-        r_genres = module.get_str_class(artist_stats.genres)
-        r_popularity = module.get_str_class(artist_stats.popularity)
-        r_href = module.get_str_class(artist_stats.href)
-        r_images = module.get_str_class(artist_stats.images)
 
-        raise Http404(f"r: [{r}]")
+        # Jenna, choose any or multiple of the r_'s below.  Once you are okay with this implementation I will do the rest.
+
+        # artist_stats = module.artist(artist_name, client_id, client_secret)
+        # artist_stats.Get_Artist()
+        # r_external_urls = module.get_str_class(artist_stats.external_urls)
+        # r_uri = module.get_str_class(artist_stats.uri)
+        # r_id = module.get_str_class(artist_stats.id)
+        # r_spotify_name = module.get_str_class(artist_stats.spotify_name)
+        # r_followers = module.get_str_class(artist_stats.followers)
+        # r_genres = module.get_str_class(artist_stats.genres)
+        # r_popularity = module.get_str_class(artist_stats.popularity)
+        # r_href = module.get_str_class(artist_stats.href)
+        # r_images = module.get_str_class(artist_stats.images)
+        #
+        # raise Http404(f"r: [{r}]")
     else:
         raise Http404("Invalid method for page")
+
+    r_genres = str(artist_stats.genres).replace("[","").replace("]","")
+    r_url = str(artist_stats.external_urls).replace("{'spotify': '","").replace("'}","")
+    r_image = str(artist_stats.images[0]).split("'url': '",1)[1].split("', '",1)[0]
+
+    # return render(request,"search/do_search.html",{"r_name":artist_stats.spotify_name,"r_image":r_image,"r_genre":r_genres,"r_url":r_url,"r_follow":artist_stats.followers,"r_pop":artist_stats.popularity})
+    return render(request,"search/home.html",{"r_name":artist_stats.spotify_name,"r_image":r_image,"r_genre":r_genres,"r_url":r_url,"r_follow":artist_stats.followers,"r_pop":artist_stats.popularity})
+
 
 #return render(request, "search/home.html", {})
 
