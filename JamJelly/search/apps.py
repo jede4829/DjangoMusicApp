@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class SearchConfig(AppConfig):    #### CAUSES ERROR WHEN ENABLED IN SETTINGS
+class searchConfig(AppConfig):    #### CAUSES ERROR WHEN ENABLED IN SETTINGS
     name = 'search'

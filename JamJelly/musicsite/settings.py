@@ -31,14 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'search.apps.SearchConfig',     ### CAUSES ERROR
+    'search.apps.searchConfig',     #We NEED this at lest for unit testing
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'search'
+    #'search'  #we don't need this if it's in SearchConfig
 ]
 
 MIDDLEWARE = [
