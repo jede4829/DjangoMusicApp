@@ -7,6 +7,7 @@ from django.utils     import timezone
 from django.template  import loader
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 
 from . import module
 
@@ -157,3 +158,11 @@ def check_password(password):
         if c in "`~!@#$%^&*()_-+=[{]}\\|;:'\",<.>/?":
             hasSpecial=True
     return hasUpper and hasLower and hasNumeric and hasSpecial
+
+
+
+def logout_view(request):
+    logout(request)
+    return render(request, "search/index.html", {})
+
+    # Redirect to a success page
