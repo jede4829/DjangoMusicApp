@@ -15,7 +15,7 @@ Welcome to the home page
     </table>
     <hr/>
     <h3>Perform search</h3>
-    <form action="do_search/" method="POST">
+    <form action="http://127.0.0.1:8000/do_search/" method="POST">
         {% csrf_token %}
         <table>
             <tr>
@@ -35,7 +35,7 @@ Welcome to the home page
 <a href="/">Logout</a>
 </div>
 
-
+{% if method == "POST" %}
 <div>
 
 <br>
@@ -79,7 +79,7 @@ Welcome to the home page
 
   <tr>
     <td>Spotify URL</td>
-    <td>{{r_url}}</td>
+    <td><a href="{{r_url}}" target="_blank">{{r_url}}</a></td>
   </tr>
 
 </table>
@@ -110,6 +110,7 @@ Artists You May Enjoy:
 </table>
 
 </div>
+{% endif %}
 
 </body>
 </html>
