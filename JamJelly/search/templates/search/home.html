@@ -1,45 +1,61 @@
 <html>
 <head>
-<title>Spotify Search | Home</title>
+  <!-- {% load static %} -->
+  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
 </head>
 <body>
-<div id="title"><b>Welcome to a custom Spotify Search!</b></div>
-<div>
-Welcome to the home page
-</div>
-<div>
-    <table>
-        <tr><td>Username:</td> <td> {{ user.username }}</td></tr>
-        <tr><td>Client ID</td> <td> {{ user.profile.client_id }}</td></tr>
-        <tr><td>Client Secret</td> <td> {{ user.profile.client_secret }}</td></tr>
-    </table>
-    <hr/>
-    <h3>Perform search</h3>
+
+<div class="navbar">
+
+  <div>
+    <a href="">🥪 Home</a>
+  </div>
+
+  <div class="container-search">
     <form action="http://127.0.0.1:8000/do_search/" method="POST">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Artist:</td><td><input type="text" name="artist" /></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Search" /></td> <td></td>
-            </tr>
-            <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
-            <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
-        </table>
+        <input type="text" name="artist" placeholder="Search by Artist..."/>
+        <input style:"text-align: center;" type="submit" value="🎵" />
+        <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
+        <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
     </form>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropbtn">Profile 😎</button>
+    <div class="dropdown-content">
+      <table>
+          <tr><td>User</td> <td> {{ user.username }}</td></tr>
+          <tr><td>ID</td> <td> {{ user.profile.client_id }}</td></tr>
+          <tr><td>Secret</td> <td> {{ user.profile.client_secret }}</td></tr>
+      </table>
+      <a href="/logout" style="text-align: center;">Logout</a>
+    </div>
+  </div>
 
 </div>
 
-<div>
-<a href="/logout">Logout</a>
+<br>
+<br>
+<br>
+<br>
+
+<!-- <div class="Profile_Div">
+  PROFILE
 </div>
+
+<div class="hide">
+  Look here is text
+  <a href="/logout" style="text-align: right;">Logout</a>
+</div> -->
+
+
+
+
 
 {% if method == "POST" %}
-<div>
+<div id = "container_main">
 
-<br>
-<br>
 
   Output Results Below:
 
