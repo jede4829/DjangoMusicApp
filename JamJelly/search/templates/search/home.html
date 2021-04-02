@@ -56,74 +56,29 @@
 {% if method == "POST" %}
 <div id = "container_main">
 
-
-  Output Results Below:
-
-<br>
-
 <table>
 
+  <col>
   <tr>
-    <th>Key</th>
-    <th>Value</th>
+      <th rowspan="4" scope="rowgroup" style="width:25%"><img src={{r_image}} alt="Artist Image Alt Txt" style="height:100px;"></th>
   </tr>
-
   <tr>
-    <td>Artist Name</td>
-    <td>{{r_name}}</td>
+    <th scope="col" style="width:25%">{{r_name}}</th>
+    <th scope="col" style="width:25%">{{r_follow}} Followers</th>
+    <th scope="col" style="width:25%">Popularity: {{r_pop}}</th>
   </tr>
-
   <tr>
-    <td>Artist Image</td>
-    <td><img src={{r_image}} alt="Artist Image Alt Txt" style="height:100px;"></td>
+    <th colspan="3" scope="colgroup" style="width:25%">Genres: {{r_genre}}</th>
   </tr>
-
   <tr>
-    <td>Artist Genres</td>
-    <td>{{r_genre}}</td>
-  </tr>
-
-  <tr>
-    <td>Artist Followers</td>
-    <td>{{r_follow}}</td>
-  </tr>
-
-  <tr>
-    <td>Artist Popularity</td>
-    <td>{{r_pop}}</td>
-  </tr>
-
-  <tr>
-    <td>Spotify URL</td>
-    <td><a href="{{r_url}}" target="_blank">{{r_url}}</a></td>
+    <th colspan="3" scope="colgroup" style="width:25%"><a href="{{r_url}}" target="_blank">{{r_url}}</a></th>
   </tr>
 
 </table>
 
-<br>
-
-Artists You May Enjoy:
-
-<br>
-
-<table>
-
-  <tr>
-    <th>Name</th>
-    <th>URL</th>
-  </tr>
-
-  <tr>
-    <td>Name 1</td>
-    <td>URL 1</td>
-  </tr>
-
-  <tr>
-    <td>Name 2</td>
-    <td>URL 2</td>
-  </tr>
-
-</table>
+  <div id = "viz">
+    Visualization
+  </div>
 
 </div>
 {% endif %}
