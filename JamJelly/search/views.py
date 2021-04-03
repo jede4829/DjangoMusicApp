@@ -42,20 +42,30 @@ def do_login(request):
         username=request.POST["name"]
         password=request.POST["password"]
 
-        #print(f"username: [{username}]")
-        #print(f"password: [{password}]")
+        print(f"username: [{username}]")
+        print(f"password: [{password}]")
 
         user = authenticate(request, username=username, password=password )
+
+        print(f"user: {user}")
+
         if user is not None:
+            print("user is not None")
             # auth'd
             login(request, user)
             #return HttpResponseRedirect('/search/home')
             return HttpResponseRedirect('/home')
         else:
+            print("user is None")
             raise Http404("Failed to login")
             # not-auth'd
         #return home(request)
+    print("invalid method for do_login")
     raise Http404("Invalid method for page")
+
+
+
+
 
 
 def do_search(request):
@@ -124,7 +134,9 @@ def register(request):
         # Need to actually perform registration here
         # --------------------
         try:
-            user = User.objects.create_user(username, "", password)
+            #user = User.objects.create_user(username, "", password)
+            user = User.objects.create_user(username=username)
+            user.set_password(password)
             user.profile.client_id=client_id
             user.profile.client_secret=client_secret
             user.save()
