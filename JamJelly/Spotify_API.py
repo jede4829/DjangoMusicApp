@@ -333,10 +333,10 @@ def normalize(df):
 # ````````````````````````````````
 
 # PUT CREDENTIALS HERE!
-cid = '6c3764ce501946cc82640a6392c345ac'   
-secret = '6b9fe8fbcf9f4d8bb34a4c601220e309'
+cid = ''   
+secret = ''
 
-artist_name = 'The Weeknd'
+artist_name = ''
 artist_stats = artist(artist_name)
 artist_stats.Get_Artist()
 
