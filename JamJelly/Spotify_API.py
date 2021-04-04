@@ -3,6 +3,10 @@ import spotipy
 import json
 import pandas as pd
 from spotipy.oauth2 import SpotifyClientCredentials
+import numpy as np
+import plotly.graph_objects as go
+import plotly.offline as pltly
+
 
 client = None
 sp = None
@@ -316,15 +320,23 @@ def Song_Generator(artist_ID):
         recommended_songs_list.append(rec_song)
     return recommended_songs_list
 
+def normalize(df):
+    result = df.copy()
+    for feature_name in df.columns:
+        max_value = df[feature_name].max()
+        min_value = df[feature_name].min()
+        result[feature_name] = (df[feature_name] - min_value) / (max_value - min_value)
+    return result
+
 
 # 1 CHOOSE ARTIST AND PRINT CLASS
 # ````````````````````````````````
 
 # PUT CREDENTIALS HERE!
-cid = ''   
-secret = ''
+cid = '6c3764ce501946cc82640a6392c345ac'   
+secret = '6b9fe8fbcf9f4d8bb34a4c601220e309'
 
-artist_name = 'jethro tull'
+artist_name = 'The Weeknd'
 artist_stats = artist(artist_name)
 artist_stats.Get_Artist()
 
@@ -333,13 +345,13 @@ artist_stats.Get_Artist()
 # 2 GET ALL ALBUMS
 # ````````````````````````````````
 
-# df_albums, Albums = Get_Albums(artist_stats.uri, 'album')
+ #df_albums, Albums = Get_Albums(artist_stats.uri, 'album')
 # View_All(Albums)   # Remove comment to print all albums.  Choose index for album of choice. 
 
 # 3 GET SONG (all of step 4 must be commented to run step 3...for now)
 # ````````````````````````````````
 
-# track = Get_Song('Faithfully')
+ #track = Get_Song('Faithfully')
 # print_class(track)   # Remove comment to print song profile
 
 # 4 GET ALL SONGS FROM AN ALBUM (all of step 3 must be commented to run step 4...for now)
@@ -392,4 +404,37 @@ for j in range(0, len(rec_song_uris)):
     tempo.append(song_analysis.tempo)
     valence.append(song_analysis.valence)
 df = pd.DataFrame({'Acoustics':acousticness, 'Danceability':danceability, 'Energy':energy, 'Instrumentalness':instrumentalness, 'Key':key, 'Liveness':liveness, 'Loudness':loudness, 'Speechiness':speechiness, 'Tempo':tempo, 'Valence':valence})
-# print(df)
+print(df)
+df = normalize(df)
+categories = ['Dance', 'Energy', 'Instrumental', 'Liveliness', 'Loudness', 'Tempo']
+categories += categories[:1]
+
+trends = [df['Danceability'].mean(), df['Energy'].mean(), df['Instrumentalness'].mean(), df['Liveness'].mean(), df['Loudness'].mean(), df['Tempo'].mean()]
+trends += trends[:1]
+
+fig = go.Figure(
+    data=[
+        go.Scatterpolar(r = trends, theta=categories, fill = 'toself', name = 'Music Trends')
+    ],
+    layout = go.Layout(
+        title = go.layout.Title(text = ''),
+        polar = dict(
+            radialaxis = dict(
+                visible = True,
+                range = [0, 1]
+            )
+        ),
+        showlegend = False
+    )
+)
+
+layout = go.Layout(
+  polar = dict(
+    radialaxis = dict(
+      visible = True,
+      range = [0, 50]
+    )
+  ),
+  showlegend = False
+)
+#pltly.plot(fig)
