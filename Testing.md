@@ -9,7 +9,7 @@ Team Members:	Ted Thayer, Jenna Dean, Shelby Bearrows, Sean McCormick
 
 -----
 
-Use Case Name:		Search for an artist..
+Use Case Name:		Search for an artist.
 Description:		The Spotify API retrieves information on the musical artist chosen by the user.
 Pre-conditions:		Spotify API should be able to capture Spotify site relevant information on artist:
 				1. Artist class fully populated post API query.
