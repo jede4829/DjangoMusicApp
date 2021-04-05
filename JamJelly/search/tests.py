@@ -34,7 +34,7 @@ class MyTest(TestCase):
 		response = self.client.get(reverse('newuser'))
 		self.assertEqual(response.status_code, 200)
 
-	# get reverse 'register'
+		# get reverse 'register'
 	    def test_register_reverse(self):
 		response = self.client.get(reverse('register'))
 		self.assertEqual(response.status_code, 404)
