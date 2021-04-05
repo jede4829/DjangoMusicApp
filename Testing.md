@@ -3,7 +3,11 @@ Project Title:	JamJelly
 Team Members:	Ted Thayer, Jenna Dean, Shelby Bearrows, Sean McCormick
 
 
-TEST CASE 1:
+-----
+
+## TEST CASE 1: 
+
+-----
 
 Use Case Name:		Search for an artist..
 Description:		The Spotify API retrieves information on the musical artist chosen by the user.
