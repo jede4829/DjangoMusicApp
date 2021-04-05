@@ -5,6 +5,7 @@ Team Members:	Ted Thayer, Jenna Dean, Shelby Bearrows, Sean McCormick
 
 TEST CASE 1:
 
+
 Use Case Name:		Search for an artist..
 
 Description:		The Spotify API retrieves information on the musical artist chosen by the user.
@@ -45,6 +46,7 @@ Post-conditions:	Artist class populated with Spotify API query information.
 
 
 TEST CASE 2:
+
 
 Use Case Name:		Search for all albums available on Spotify by artist.
 
@@ -91,6 +93,7 @@ Post-conditions:	A list of album classes populated with Spotify API query inform
 
 TEST CASE 3:
 
+
 Use Case Name:		Search for album recommendations on Spotify by various artists related to the original artist.
 
 Description:		The Spotify API retrieves recommended albums created by various musical artists related to the original artist.
@@ -136,6 +139,7 @@ Post-conditions:	A list of recommended album classes populated with Spotify API 
 
 TEST CASE 4:
 
+
 Use Case Name:		Retrieve song recommendations from Spotify by various artists related to the original artist.
 
 Description:		This series of tests ensures that the Spotify API retrieves recommended songs created by various musical artists related to the original artist.
@@ -179,6 +183,7 @@ Post-conditions:	A list of recommended songs classes populated with Spotify API 
 
 TEST CASE 5:
 
+
 Use Case Name:		Capture acoustic characteristics of each recommended song.
 
 Description:		The Spotify API returns all the audio properties of each recommended song.
@@ -217,6 +222,7 @@ Post-conditions:	A dataframe populated with all the acoustic features of every r
 
 
 TEST CASE 6:
+
 
 Use Case Name:		Perform song search.
 
@@ -258,6 +264,7 @@ Post-conditions:	User is given artist information for searched song.
 
 
 TEST CASE 7:
+
 
 Use Case Name:		Verify JamJelly site functionality.
 
@@ -301,6 +308,7 @@ Post-conditions:	All site functions confirmed to work properly.
 
 
 TEST CASE 8:
+
 
 Use Case Name:		Site user login and authentication.
 
