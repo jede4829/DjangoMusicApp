@@ -20,17 +20,22 @@ Pre-conditions:		Spotify API should be able to capture Spotify site relevant inf
 				4. URL to Spotify site for artist is valid.
 				5. 
 				6. Spotify URI is valid and meets filtering requirements of regular expression that tests it.
+				7. 
 Test steps:		Steps taken to execute artist query of Spotify API.
 				1. Navigate to /JamJelly/search/test_API.py.
     				2. Set boolean variable artist_testing_set = True.
-    				3. 
 				3. Execute the command: python C:/<Local Directory Path>/JamJelly/manage.py test
+
 Expected result:	All five tests pass.
+
 Actual result:		All five tests pass.
+
 Status (Pass/Fail):	Pass
+
 Notes:			Spotify_API code needs to execute to perform information retrieval from Spotify API.
 				artist = 'Halsey' # (example artist)
 				artist_test = Spotify_API.artist(artist)
+				
 Post-conditions:	Artist class populated with Spotify API query information.
 
 
