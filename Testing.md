@@ -3,11 +3,7 @@
 Team Members:	Ted Thayer, Jenna Dean, Shelby Bearrows, Sean McCormick
 
 
-
-
 TEST CASE 1:
-
-
 
 
 Use Case Name:		Search for an artist..
