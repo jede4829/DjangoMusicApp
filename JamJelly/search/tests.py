@@ -14,22 +14,22 @@ class MyTest(TestCase):
 		self.request = HttpRequest()
 		self.request.method = "GET"
 
-	#login page: username and password
+		#login page: username and password
 	    def test_login(self):
 		response=self.client.get("/")
 		self.assertEqual(response.status_code, 200)
 
-	# get reverse of 'index'
+		# get reverse of 'index'
 	    def test_index_reverse(self):
 		response = self.client.get(reverse('index'))
 		self.assertEqual(response.status_code, 200)
 
-	# get a non-existent endpoint
+		# get a non-existent endpoint
 	    def test_nonexistent_endpoint(self):
 		response = self.client.get("/finley")
 		self.assertEqual(response.status_code, 404)
 
-	# get reverse 'newuser'
+		# get reverse 'newuser'
 	    def test_newuser_reverse(self):
 		response = self.client.get(reverse('newuser'))
 		self.assertEqual(response.status_code, 200)
@@ -39,19 +39,19 @@ class MyTest(TestCase):
 		response = self.client.get(reverse('register'))
 		self.assertEqual(response.status_code, 404)
 
-	# get reverse 'home'
+		# get reverse 'home'
 	    def test_home_reverse(self):
 		response = self.client.get(reverse('home'))
 		self.assertEqual(response.status_code, 404)
 
-	# get reverse 'do_search'
+		# get reverse 'do_search'
 	    def test_do_search_reverse(self):
 		response = self.client.get(reverse('do_search'))
 		self.assertEqual(response.status_code, 404)
 
-	#for some reason do_login is failing in the test
-	#don't know why 
-	#commenting out for now
+		#for some reason do_login is failing in the test
+		#don't know why 
+		#commenting out for now
 
 	    def test_do_login_broken(self):
 		#print("test_do_login")
