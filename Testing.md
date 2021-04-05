@@ -44,9 +44,9 @@ Notes:			Spotify\_API code needs to execute to perform information retrieval fro
 
 Post-conditions:	Artist class populated with Spotify API query information.
 
-
+-------------------------
 TEST CASE 2:
-
+-------------------------
 
 Use Case Name:		Search for all albums available on Spotify by artist.
 
@@ -90,9 +90,9 @@ Notes:			Spotify\_API code needs to execute to perform information retrieval fro
 
 Post-conditions:	A list of album classes populated with Spotify API query information.
 
-
+-------------------------
 TEST CASE 3:
-
+-------------------------
 
 Use Case Name:		Search for album recommendations on Spotify by various artists related to the original artist.
 
@@ -136,9 +136,9 @@ Notes:			Spotify\_API code needs to execute to perform information retrieval fro
 
 Post-conditions:	A list of recommended album classes populated with Spotify API query information.
 
-
+-------------------------
 TEST CASE 4:
-
+-------------------------
 
 Use Case Name:		Retrieve song recommendations from Spotify by various artists related to the original artist.
 
@@ -180,9 +180,9 @@ Notes:			Spotify\_API code needs to execute to perform information retrieval fro
 
 Post-conditions:	A list of recommended songs classes populated with Spotify API query information.
 
-
+-------------------------
 TEST CASE 5:
-
+-------------------------
 
 Use Case Name:		Capture acoustic characteristics of each recommended song.
 
@@ -220,9 +220,9 @@ Notes:			Spotify\_API code needs to execute to perform information retrieval fro
 
 Post-conditions:	A dataframe populated with all the acoustic features of every recommended song is created.
 
-
+-------------------------
 TEST CASE 6:
-
+-------------------------
 
 Use Case Name:		Perform song search.
 
@@ -262,9 +262,9 @@ Notes:			Spotify\_API code needs to execute to perform information retrieval fro
 
 Post-conditions:	User is given artist information for searched song.
 
-
+-------------------------
 TEST CASE 7:
-
+-------------------------
 
 Use Case Name:		Verify JamJelly site functionality.
 
@@ -306,9 +306,9 @@ Notes:			Import the following:
 
 Post-conditions:	All site functions confirmed to work properly.
 
-
+-------------------------
 TEST CASE 8:
-
+-------------------------
 
 Use Case Name:		Site user login and authentication.
 
