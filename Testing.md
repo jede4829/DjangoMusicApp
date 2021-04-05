@@ -10,16 +10,20 @@ Team Members:	Ted Thayer, Jenna Dean, Shelby Bearrows, Sean McCormick
 -----
 
 Use Case Name:		Search for an artist.
+
 Description:		The Spotify API retrieves information on the musical artist chosen by the user.
+
 Pre-conditions:		Spotify API should be able to capture Spotify site relevant information on artist:
 				1. Artist class fully populated post API query.
 				2. Artist name given by user matches artist name found by Spotify API query.
 				3. Associated images of artist returned from Spotify.
 				4. URL to Spotify site for artist is valid.
-				5. Spotify URI is valid and meets filtering requirements of regular expression that tests it.
+				5. 
+				6. Spotify URI is valid and meets filtering requirements of regular expression that tests it.
 Test steps:		Steps taken to execute artist query of Spotify API.
 				1. Navigate to /JamJelly/search/test_API.py.
     				2. Set boolean variable artist_testing_set = True.
+    				3. 
 				3. Execute the command: python C:/<Local Directory Path>/JamJelly/manage.py test
 Expected result:	All five tests pass.
 Actual result:		All five tests pass.
