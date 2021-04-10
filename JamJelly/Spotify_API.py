@@ -188,6 +188,11 @@ def Get_Albums(uri, type):
     return df, album_ClassList
 
 def Get_Song(track):
+    global client
+    global sp 
+    if client == None and sp == None:
+        client = SpotifyClientCredentials(client_id = cid, client_secret = secret)
+        sp = spotipy.Spotify(client_credentials_manager = client)
     song_stats = song()
     songs = sp.search(track, limit=3)
     single = songs['tracks']['items'][0]

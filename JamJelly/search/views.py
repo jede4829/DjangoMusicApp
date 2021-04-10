@@ -76,22 +76,6 @@ def do_search(request):
 
         artist_stats = module.artist(artist_name, client_id, client_secret)
         artist_stats.Get_Artist()
-
-        # Jenna, choose any or multiple of the r_'s below.  Once you are okay with this implementation I will do the rest.
-
-        # artist_stats = module.artist(artist_name, client_id, client_secret)
-        # artist_stats.Get_Artist()
-        # r_external_urls = module.get_str_class(artist_stats.external_urls)
-        # r_uri = module.get_str_class(artist_stats.uri)
-        # r_id = module.get_str_class(artist_stats.id)
-        # r_spotify_name = module.get_str_class(artist_stats.spotify_name)
-        # r_followers = module.get_str_class(artist_stats.followers)
-        # r_genres = module.get_str_class(artist_stats.genres)
-        # r_popularity = module.get_str_class(artist_stats.popularity)
-        # r_href = module.get_str_class(artist_stats.href)
-        # r_images = module.get_str_class(artist_stats.images)
-        #
-        # raise Http404(f"r: [{r}]")
     else:
         raise Http404("Invalid method for page")
 
@@ -105,10 +89,19 @@ def do_search(request):
 
     return render(request,"search/home.html",context)
     
+def do_search_song(request):
+    if request.method == "POST":
+        song_name = request.POST["song"]
+        client_id = request.POST["client_id"]
+        client_secret = request.POST["client_secret"]
+        track_stats = Spotify_API.Get_Song(song_name, client_id, client_secret)
+    else:
+        raise Http404("Invalid method for page")
 
+    context = {"method": request.method, "r_name":track_stats.artist_name, "r_album":track_stats.album_url,  "r_album_title":track_stats.album_title,
+               "r_song_url":track_stats.song_url, "r_song_name":track_stats.song_name, "r_song_popularity":track_stats.song_popularity, "r_song_track_number":track_stats.song_track_number}
 
-#return render(request, "search/home.html", {})
-
+    return render(request, "search/home.html", context)  # RETURN INFORMATION TO DIFFERENT PAGE THAN home.html WHICH IS FOR THE ARTIST.
 
 def register(request):
     if request.method=="POST":
