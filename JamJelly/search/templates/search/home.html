@@ -76,8 +76,12 @@
 
 </table>
 
-  <div id = "viz">
-    Visualization
+  <div>
+
+  {% autoescape off %}
+  {{ plot_div }}
+  {% endautoescape %}
+
   </div>
 
 </div>

@@ -2,6 +2,8 @@ import spotipy
 import json
 import pandas as pd
 from spotipy.oauth2 import SpotifyClientCredentials
+from plotly.offline import plot
+import plotly.graph_objs as go
 
 #cid = '8d97e21ce7284e4bb56d7b54df27a8b8'
 #secret = '663c3435dd1e4cb097b14bd809be9c83'
@@ -240,3 +242,133 @@ View_AllAlbums(Albums)   # Remove comment to print all albums.  Choose index for
 df_tracks, Tracks = Get_Album_Tracks(Albums[0].uri)   # insert album index from step 2 here
 View_AllTracks(Tracks)    # Remove comment to print all tracks
 """
+
+class track_features:
+    def __init__(self):
+        self.acousticness = ''
+        self.analysis_url = ''
+        self.danceability = ''
+        self.energy = ''
+        self.id = ''
+        self.instrumentalness = ''
+        self.key = ''
+        self.liveness = ''
+        self.loudness = ''
+        self.mode = ''
+        self.speechiness = ''
+        self.tempo = ''
+        self.time_signature = ''
+        self.track_href = ''
+        self.uri = ''
+        self.valence = ''
+
+def Song_Features(single):
+    features = sp.audio_features(single)
+    track_stats = track_features()
+    track_stats.acousticness = features[0]['acousticness']
+    track_stats.danceability = features[0]['danceability']
+    track_stats.duration_ms = features[0]['duration_ms']
+    track_stats.energy = features[0]['energy']
+    track_stats.id = features[0]['id']
+    track_stats.instrumentalness = features[0]['instrumentalness']
+    track_stats.key = features[0]['key']
+    track_stats.liveness = features[0]['liveness']
+    track_stats.loudness = features[0]['loudness']
+    track_stats.mode = features[0]['mode']
+    track_stats.speechiness = features[0]['speechiness']
+    track_stats.tempo = features[0]['tempo']
+    track_stats.time_signature = features[0]['time_signature']
+    track_stats.track_href = features[0]['track_href']
+    track_stats.type = features[0]['type']
+    track_stats.uri = features[0]['uri']
+    track_stats.valence = features[0]['valence']
+    return track_stats
+
+class Rec_Song:
+    def __init__(self):
+        self.artist_name = ''
+        self.album_url = ''
+        self.album_id = ''
+        self.album_title = ''
+        self.album_uri = ''
+        self.song_url = ''
+        self.song_id = ''
+        self.song_name = ''
+        self.song_popularity = 0
+        self.track_number = 0
+        self.song_uri = ''
+
+def Song_Generator(artist_ID):
+    recommended_songs_list = []
+    recommended_songs = sp.recommendations(seed_artists = [artist_ID])
+    all_recommended_songs = recommended_songs['tracks']
+    for k in range(0, len(all_recommended_songs)):
+        rec_song = Rec_Song()
+        rec_song.artist_name = recommended_songs['tracks'][k]['album']['artists'][0]['name']
+        rec_song.album_url = recommended_songs['tracks'][k]['album']['external_urls']['spotify']
+        rec_song.album_id = recommended_songs['tracks'][k]['album']['id']
+        rec_song.album_title = recommended_songs['tracks'][k]['album']['name']
+        rec_song.album_uri = recommended_songs['tracks'][k]['album']['uri']
+        rec_song.song_url = recommended_songs['tracks'][k]['external_urls']['spotify']
+        rec_song.song_id = recommended_songs['tracks'][k]['id']
+        rec_song.song_name = recommended_songs['tracks'][k]['name']
+        rec_song.song_popularity = recommended_songs['tracks'][k]['popularity']
+        rec_song.track_number = recommended_songs['tracks'][k]['track_number']
+        rec_song.song_uri = recommended_songs['tracks'][k]['uri']
+        recommended_songs_list.append(rec_song)
+    return recommended_songs_list
+
+def normalize(df):
+    result = df.copy()
+    for feature_name in df.columns:
+        max_value = df[feature_name].max()
+        min_value = df[feature_name].min()
+        result[feature_name] = (df[feature_name] - min_value) / (max_value - min_value)
+    return result
+
+def plotter(ID):
+    rec_song_uris = []
+    rec_song_popularity = []
+    recommended_songs = Song_Generator(ID)
+    for k in range(0, len(recommended_songs)):
+        rec_song_uris.append(recommended_songs[k].song_uri)
+        rec_song_popularity.append(recommended_songs[k].song_popularity)
+
+    all_song_analysis = []
+    danceability, energy, instrumentalness, liveness, loudness, tempo,  = [], [], [], [], [], []
+    for j in range(0, len(rec_song_uris)):
+        song_analysis = Song_Features(rec_song_uris[j])
+        all_song_analysis.append(song_analysis)
+        danceability.append(song_analysis.danceability)
+        energy.append(song_analysis.energy)
+        instrumentalness.append(song_analysis.instrumentalness)
+        liveness.append(song_analysis.liveness)
+        loudness.append(song_analysis.loudness)
+        tempo.append(song_analysis.tempo)
+    df = pd.DataFrame({'Danceability':danceability, 'Energy':energy, 'Instrumentalness':instrumentalness, 'Liveness':liveness, 'Loudness':loudness, 'Tempo':tempo})
+
+    df = normalize(df)
+    categories = ['Dance', 'Energy', 'Instrumental', 'Liveliness', 'Loudness', 'Tempo']
+    categories += categories[:1]
+
+    trends = [df['Danceability'].mean(), df['Energy'].mean(), df['Instrumentalness'].mean(), df['Liveness'].mean(), df['Loudness'].mean(), df['Tempo'].mean()]
+    trends += trends[:1]
+
+    fig = go.Figure(
+        data=[
+            go.Scatterpolar(r = trends, theta=categories, fill = 'toself', name = 'Music Trends')
+        ],
+        layout = go.Layout(
+            title = go.layout.Title(text = ''),
+            polar = dict(
+                radialaxis = dict(
+                    visible = True,
+                    range = [0, 1]
+                )
+            ),
+            showlegend = False
+        )
+    )
+
+    plt_div = plot(fig, output_type='div')
+    return plt_div

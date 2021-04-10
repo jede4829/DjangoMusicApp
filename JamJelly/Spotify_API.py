@@ -4,8 +4,8 @@ import json
 import pandas as pd
 from spotipy.oauth2 import SpotifyClientCredentials
 import numpy as np
-import plotly.graph_objects as go
-import plotly.offline as pltly
+from plotly.offline import plot
+import plotly.graph_objs as go
 
 
 client = None
@@ -333,8 +333,8 @@ def normalize(df):
 # ````````````````````````````````
 
 # PUT CREDENTIALS HERE!
-cid = ''   
-secret = ''
+cid = '6c3764ce501946cc82640a6392c345ac'   
+secret = '6b9fe8fbcf9f4d8bb34a4c601220e309'
 
 artist_name = ''
 artist_stats = artist(artist_name)
@@ -387,54 +387,49 @@ for k in range(0, len(recommended_songs)):
 
 # 8 CAPTURE ALL SONG AUDIO FEATURES
 # ````````````````````````````````
+def plotter():
+    rec_song_uris = []
+    rec_song_popularity = []
+    recommended_songs = Song_Generator(artist_stats.id)
+    for k in range(0, len(recommended_songs)):
+        rec_song_uris.append(recommended_songs[k].song_uri)
+        rec_song_popularity.append(recommended_songs[k].song_popularity)
 
-all_song_analysis = []
-acousticness, danceability, energy, instrumentalness, key, liveness, loudness, speechiness, tempo, valence = [], [], [], [], [], [], [], [], [], []
-for j in range(0, len(rec_song_uris)):
-    song_analysis = Song_Features(rec_song_uris[j])
-    all_song_analysis.append(song_analysis)
-    acousticness.append(song_analysis.acousticness)
-    danceability.append(song_analysis.danceability)
-    energy.append(song_analysis.energy)
-    instrumentalness.append(song_analysis.instrumentalness)
-    key.append(song_analysis.key)
-    liveness.append(song_analysis.liveness)
-    loudness.append(song_analysis.loudness)
-    speechiness.append(song_analysis.speechiness)
-    tempo.append(song_analysis.tempo)
-    valence.append(song_analysis.valence)
-df = pd.DataFrame({'Acoustics':acousticness, 'Danceability':danceability, 'Energy':energy, 'Instrumentalness':instrumentalness, 'Key':key, 'Liveness':liveness, 'Loudness':loudness, 'Speechiness':speechiness, 'Tempo':tempo, 'Valence':valence})
-print(df)
-df = normalize(df)
-categories = ['Dance', 'Energy', 'Instrumental', 'Liveliness', 'Loudness', 'Tempo']
-categories += categories[:1]
+    all_song_analysis = []
+    danceability, energy, instrumentalness, liveness, loudness, tempo,  = [], [], [], [], [], []
+    for j in range(0, len(rec_song_uris)):
+        song_analysis = Song_Features(rec_song_uris[j])
+        all_song_analysis.append(song_analysis)
+        danceability.append(song_analysis.danceability)
+        energy.append(song_analysis.energy)
+        instrumentalness.append(song_analysis.instrumentalness)
+        liveness.append(song_analysis.liveness)
+        loudness.append(song_analysis.loudness)
+        tempo.append(song_analysis.tempo)
+    df = pd.DataFrame({'Danceability':danceability, 'Energy':energy, 'Instrumentalness':instrumentalness, 'Liveness':liveness, 'Loudness':loudness, 'Tempo':tempo})
 
-trends = [df['Danceability'].mean(), df['Energy'].mean(), df['Instrumentalness'].mean(), df['Liveness'].mean(), df['Loudness'].mean(), df['Tempo'].mean()]
-trends += trends[:1]
+    df = normalize(df)
+    categories = ['Dance', 'Energy', 'Instrumental', 'Liveliness', 'Loudness', 'Tempo']
+    categories += categories[:1]
 
-fig = go.Figure(
-    data=[
-        go.Scatterpolar(r = trends, theta=categories, fill = 'toself', name = 'Music Trends')
-    ],
-    layout = go.Layout(
-        title = go.layout.Title(text = ''),
-        polar = dict(
-            radialaxis = dict(
-                visible = True,
-                range = [0, 1]
-            )
-        ),
-        showlegend = False
+    trends = [df['Danceability'].mean(), df['Energy'].mean(), df['Instrumentalness'].mean(), df['Liveness'].mean(), df['Loudness'].mean(), df['Tempo'].mean()]
+    trends += trends[:1]
+
+    fig = go.Figure(
+        data=[
+            go.Scatterpolar(r = trends, theta=categories, fill = 'toself', name = 'Music Trends')
+        ],
+        layout = go.Layout(
+            title = go.layout.Title(text = ''),
+            polar = dict(
+                radialaxis = dict(
+                    visible = True,
+                    range = [0, 1]
+                )
+            ),
+            showlegend = False
+        )
     )
-)
 
-layout = go.Layout(
-  polar = dict(
-    radialaxis = dict(
-      visible = True,
-      range = [0, 50]
-    )
-  ),
-  showlegend = False
-)
-#pltly.plot(fig)
+    plt_div = plot(fig, output_type='div')
+    return plt_div
