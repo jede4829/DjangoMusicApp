@@ -14,6 +14,12 @@
     <!-- <img src="/static/images/jam-icon-small.gif" alt="" style="width: 20%;"> -->
     <a href="home">Jam Jelly</a>
   </div>
+
+  {% if error %}
+    <script>
+    alert("Error: Search Cannot Be Empty");
+    </script>
+  {% endif %}
   
 
   <div class="container-search">

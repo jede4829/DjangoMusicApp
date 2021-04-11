@@ -69,8 +69,17 @@ def do_login(request):
 
 
 def do_search(request):
+    print("do_search")
     if request.method == "POST":
         artist_name = request.POST["artist"]
+        
+        if artist_name == "" or artist_name.strip() == "":
+            #raise Http404("Search cannot be empty")
+            return render(request,"search/home.html",{'error':'search cannot be empty'})
+
+
+
+
         client_id = request.POST["client_id"]
         client_secret = request.POST["client_secret"]
 
