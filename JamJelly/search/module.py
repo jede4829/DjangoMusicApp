@@ -5,8 +5,8 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from plotly.offline import plot
 import plotly.graph_objs as go
 
-#cid = '8d97e21ce7284e4bb56d7b54df27a8b8'
-#secret = '663c3435dd1e4cb097b14bd809be9c83'
+#cid = ''
+#secret = ''
 
 #client = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 #sp = spotipy.Spotify(client_credentials_manager=client)

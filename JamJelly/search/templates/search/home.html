@@ -1,28 +1,35 @@
 <html>
 <head>
   <!-- {% load static %} -->
-  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+  </style>
 </head>
 <body>
 
 <div class="navbar">
 
-  <div>
-    <a href="">🥪 Home</a>
+  <div id = "home_name">
+    <!-- <img src="/static/images/jam-icon-small.gif" alt="" style="width: 20%;"> -->
+    <a href="home">Jam Jelly</a>
   </div>
+  
 
   <div class="container-search">
     <form action="http://127.0.0.1:8000/do_search/" method="POST">
         {% csrf_token %}
         <input type="text" name="artist" placeholder="Search by Artist..."/>
-        <input style:"text-align: center;" type="submit" value="🎵" />
+        <input type="submit" value="🎵" />
         <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
         <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
     </form>
   </div>
 
+
+
   <div class="dropdown">
-    <button class="dropbtn">Profile 😎</button>
+    <button class="dropbtn">Profile</button>
     <div class="dropdown-content">
       <table>
           <tr><td>User</td> <td> {{ user.username }}</td></tr>
@@ -32,6 +39,7 @@
       <a href="/logout" style="text-align: center;">Logout</a>
     </div>
   </div>
+ 
 
 </div>
 
@@ -39,19 +47,6 @@
 <br>
 <br>
 <br>
-
-<!-- <div class="Profile_Div">
-  PROFILE
-</div>
-
-<div class="hide">
-  Look here is text
-  <a href="/logout" style="text-align: right;">Logout</a>
-</div> -->
-
-
-
-
 
 {% if method == "POST" %}
 <div id = "container_main">
