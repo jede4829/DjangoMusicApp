@@ -15,37 +15,37 @@ class MyTest(TestCase):
 			self.request.method = "GET"
 
 		#login page: username and password
-	    def test_login(self):
+		def test_login(self):
 			response=self.client.get("/")
 			self.assertEqual(response.status_code, 200)
 
 		# get reverse of 'index'
-	    def test_index_reverse(self):
+		def test_index_reverse(self):
 			response = self.client.get(reverse('index'))
 			self.assertEqual(response.status_code, 200)
 
 		# get a non-existent endpoint
-	    def test_nonexistent_endpoint(self):
+		def test_nonexistent_endpoint(self):
 			response = self.client.get("/finley")
 			self.assertEqual(response.status_code, 404)
 
 		# get reverse 'newuser'
-	    def test_newuser_reverse(self):
+		def test_newuser_reverse(self):
 			response = self.client.get(reverse('newuser'))
 			self.assertEqual(response.status_code, 200)
 
 		# get reverse 'register'
-	    def test_register_reverse(self):
+		def test_register_reverse(self):
 			response = self.client.get(reverse('register'))
 			self.assertEqual(response.status_code, 404)
 
 		# get reverse 'home'
-	    def test_home_reverse(self):
+		def test_home_reverse(self):
 			response = self.client.get(reverse('home'))
 			self.assertEqual(response.status_code, 404)
 
 		# get reverse 'do_search'
-	    def test_do_search_reverse(self):
+		def test_do_search_reverse(self):
 			response = self.client.get(reverse('do_search'))
 			self.assertEqual(response.status_code, 404)
 
@@ -53,7 +53,7 @@ class MyTest(TestCase):
 		#don't know why 
 		#commenting out for now
 
-	    def test_do_login_broken(self):
+		def test_do_login_broken(self):
 			#print("test_do_login")
 			#client = Client()
 			if self.client:
@@ -81,7 +81,7 @@ class MyTest(TestCase):
 		#print(f"response: {response.__dict__}")
 		#self.assertEqual(response.status_code, 200)
 
-	    def test_redirect(self):
+		def test_redirect(self):
 			#print("test_redirect")
 			response = self.client.post("/do_login", {
 				"name":"jenna1",
