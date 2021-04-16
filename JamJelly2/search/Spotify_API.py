@@ -320,12 +320,12 @@ def plotter():
 # ````````````````````````````````
 
 client, sp = None, None
-cid = '9cab75c094f941978bff0389a9d5dfa4'
-secret = '20b6077267ae4241af1756d4544b5069'
+cid = ''
+secret = ''
 
-artist_name = 'Journey'
-artist_stats = artist(artist_name)
-artist_stats.Get_Artist()
+# artist_name = 'Journey'
+# artist_stats = artist(artist_name)
+# artist_stats.Get_Artist()
 # Albums = Get_Albums(artist_stats.uri, 'album')
 # song_name = 'Faithfully'
 # song_track = Get_Song(song_name)
