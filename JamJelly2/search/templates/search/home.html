@@ -1,0 +1,92 @@
+<html>
+<head>
+  <!-- {% load static %} -->
+  <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+
+  <div id = "home_name">
+    <!-- <img src="/static/images/jam-icon-small.gif" alt="" style="width: 20%;"> -->
+    <a href="home">Jam Jelly</a>
+  </div>
+
+  {% if error %}
+    <script>
+    alert("Error: Search Cannot Be Empty");
+    </script>
+  {% endif %}
+  
+
+  <div class="container-search">
+    <form action="http://127.0.0.1:8000/do_search/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="artist" placeholder="Search by Artist..."/>
+        <input type="submit" value="🎵" />
+        <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
+        <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
+    </form>
+  </div>
+
+
+
+  <div class="dropdown">
+    <button class="dropbtn">Profile</button>
+    <div class="dropdown-content">
+      <table>
+          <tr><td>User</td> <td> {{ user.username }}</td></tr>
+          <tr><td>ID</td> <td> {{ user.profile.client_id }}</td></tr>
+          <tr><td>Secret</td> <td> {{ user.profile.client_secret }}</td></tr>
+      </table>
+      <a href="/logout" style="text-align: center;">Logout</a>
+    </div>
+  </div>
+ 
+
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+{% if method == "POST" %}
+<div id = "container_main">
+
+<table>
+
+  <col>
+  <tr>
+      <th rowspan="4" scope="rowgroup" style="width:25%"><img src={{r_image}} alt="Artist Image Alt Txt" style="height:100px;"></th>
+  </tr>
+  <tr>
+    <th scope="col" style="width:25%">{{r_name}}</th>
+    <th scope="col" style="width:25%">{{r_follow}} Followers</th>
+    <th scope="col" style="width:25%">Popularity: {{r_pop}}</th>
+  </tr>
+  <tr>
+    <th colspan="3" scope="colgroup" style="width:25%">Genres: {{r_genre}}</th>
+  </tr>
+  <tr>
+    <th colspan="3" scope="colgroup" style="width:25%"><a href="{{r_url}}" target="_blank">{{r_url}}</a></th>
+  </tr>
+
+</table>
+
+  <div>
+
+  {% autoescape off %}
+  {{ plot_div }}
+  {% endautoescape %}
+
+  </div>
+
+</div>
+{% endif %}
+
+</body>
+</html>
