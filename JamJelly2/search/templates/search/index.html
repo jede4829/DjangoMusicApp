@@ -1,0 +1,51 @@
+
+<html>
+  <head>
+    <!-- {% load static %} -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    </style>
+    <title>Spotify Search Login</title>
+  </head>
+  
+  <body>
+    <div class="session">
+  
+      <div class="left">
+        <?xml version="1.0" encoding="UTF-8"?>
+        <img src="/static/images/jam-icon-main.gif" alt="" style="width: 75%;">
+  
+      </div>
+  
+      <form id="loginform" method="POST" action="do_login/" style="background:  #fefefe;">
+        <br>
+        <h4 style="margin: 10px;"><span>Welcome to</span> JamJelly</h4>
+        <br>
+        <p style="margin: 10px;">Welcome back! Log in to your account to start jammin'</p>
+        <br>
+  
+        <div class="floating-label">
+  
+          {% csrf_token %}
+          <label for="name" style="margin: 10px;">Username:</label>
+          <input placeholder="Username" type="text" name="name" id="name" value="" autocomplete="off" style="margin: 10px;">
+  
+        </div>
+  
+        <div class="floating-label">
+  
+          <label for="password" style="margin: 10px;">Password:</label>
+          <input placeholder="Password" type="password" name="password" id="password" autocomplete="off" style="margin: 10px;">
+  
+        </div>
+  
+        <input type="submit" id="submit" name="submit" value="Login" style="margin-left: 25px;"/>
+  
+        <a href="newuser" class="discrete" target="_blank" style="margin-left: 25px;">Sign Up</a>
+  
+      </form>
+    </div>
+  </body>
+  
+  </html>
