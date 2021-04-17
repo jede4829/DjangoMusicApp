@@ -8,6 +8,20 @@
 </head>
 <body>
 
+  <script type="text/javascript">
+    document.getElementById('selector').onchange = function() {
+      alert("selector changed");
+      var newvalue = selector.value;
+      if(newvalue=="Artist"){
+        var newaction = "http://127.0.0.1:8000/do_search/";
+      } else {
+        var newaction = "http://127.0.0.1:8000/do_search_song/";
+      };
+      document.getElementById('search_form').action = newaction;
+    };
+  </script>
+
+
 <div class="navbar">
 
   <div id = "home_name">
@@ -20,7 +34,6 @@
     alert("Error: Search Cannot Be Empty");
     </script>
   {% endif %}
-  
 
   <div class="container-search">
     <form action="http://127.0.0.1:8000/do_search/" method="POST">
@@ -45,7 +58,7 @@
       <a href="/logout" style="text-align: center;">Logout</a>
     </div>
   </div>
- 
+
 
 </div>
 

@@ -1,3 +1,4 @@
+
 import spotipy
 import json
 import pandas as pd
@@ -6,20 +7,57 @@ import numpy as np
 from plotly.offline import plot
 import plotly.graph_objs as go
 
+
+client = None
+sp = None
+
+def print_class(instance):
+    keys = []
+    class_var = instance.__dict__
+    for k in class_var:
+        keys.append(k)
+    for j in keys:
+        if type(class_var) is not str: 
+            print(j + ' :    ' + str(class_var[j]))
+        else:
+            print(j + ' :    ' + class_var[j])
+    return None
+
+def get_str_class(instance):
+    keys, r = [], ''
+    class_var = instance.__dict__
+    for k in class_var:
+        keys.append(k)
+    for j in keys:
+        if type(class_var) is not str: 
+            r += j + ' :    ' + str(class_var[j]) + "\n"
+        else:
+            r += j + ' :    ' + str(class_var[j]) + "\n"
+    return r 
+
+def print_json(object):
+    print(json.dumps(object, sort_keys = True, indent = 4))
+    return None
+
+def View_All(class_list):
+    for i in range(0, len(class_list)):
+        print('INDEX: ' + str(i) + '\n')
+        print_class(class_list[i])
+        print('\n')
+
 class album:
     def __init__(self):
         self.href = ''
         self.uri = ''
         self.id = ''
         self.album_name = ''
-        self.artist_name = ''
         self.release_date = ''
         self.tracks = ''
         self.images = ''
         self.url = ''
 
 class artist:
-    def __init__(self, name, cid, secret):
+    def __init__(self, name):
         self.external_urls = ''
         self.uri = ''
         self.id = ''
@@ -30,8 +68,6 @@ class artist:
         self.popularity = 0
         self.href = ''
         self.images = ''
-        self.cid = cid
-        self.secret = secret
 
     def Artist_Profile(self, tp_art):
         self.external_urls = tp_art['external_urls']
@@ -46,10 +82,10 @@ class artist:
 
     def Get_Artist(self):
         global client
-        global sp
-        if client == None and sp == None:
-            client = SpotifyClientCredentials(client_id = cid, client_secret = secret)
-            sp = spotipy.Spotify(client_credentials_manager = client)
+        global sp 
+        if client==None and sp==None:
+            client = SpotifyClientCredentials(client_id=cid, client_secret=secret)
+            sp = spotipy.Spotify(client_credentials_manager=client)
         results = sp.search(q='artist:' + self.input_name, type='artist')
         List_of_Artists = results['artists']
         Attributes_Artists = List_of_Artists['items']
@@ -121,32 +157,26 @@ class Rec_Album:
         self.album_total_tracks = ''
         self.album_uri = ''
 
-class Rec_Song:
-    def __init__(self):
-        self.artist_name = ''
-        self.album_url = ''
-        self.album_id = ''
-        self.album_title = ''
-        self.album_uri = ''
-        self.song_url = ''
-        self.song_id = ''
-        self.song_name = ''
-        self.song_popularity = 0
-        self.track_number = 0
-        self.song_uri = ''
-
 def Get_Albums(uri, type):
+    album_titles, uris, hrefs, ids, tracks, rds, imgs, urls = [], [], [], [], [], [], [], []
     album_ClassList = []
-    artist_albums = sp.artist_albums(uri, album_type = type)
+    artist_albums = sp.artist_albums(uri, album_type=type)
     available_albums = artist_albums['items']
     k = 0
     while k < len(available_albums):
+        album_titles.append(available_albums[k]['name'])
+        uris.append(available_albums[k]['uri'])
+        hrefs.append(available_albums[k]['href'])
+        ids.append(available_albums[k]['id'])
+        tracks.append(available_albums[k]['total_tracks'])
+        rds.append(available_albums[k]['release_date'])
+        imgs.append(available_albums[k]['images'])
+        urls.append(available_albums[k]['external_urls']['spotify'])
         album_stats = album()
         album_stats.href = available_albums[k]['href']
         album_stats.uri = available_albums[k]['uri']
         album_stats.id = available_albums[k]['id']
         album_stats.album_name = available_albums[k]['name']
-        album_stats.artist_name = available_albums[k]['artists'][0]['name']
         album_stats.release_date = available_albums[k]['release_date']
         album_stats.tracks = available_albums[k]['total_tracks']
         album_stats.images = available_albums[k]['images']
@@ -154,11 +184,12 @@ def Get_Albums(uri, type):
         album_ClassList.append(album_stats)
         del album_stats
         k += 1
-    return album_ClassList
+    df = pd.DataFrame({'Album Name':album_titles, 'Release Date':rds, '# of Tracks':tracks, 'Spotify ID':ids, 'Spotify URI':uris, 'Spotify HREF':hrefs, 'Images':imgs})
+    return df, album_ClassList
 
 def Get_Song(track):
     global client
-    global sp
+    global sp 
     if client == None and sp == None:
         client = SpotifyClientCredentials(client_id = cid, client_secret = secret)
         sp = spotipy.Spotify(client_credentials_manager = client)
@@ -182,11 +213,22 @@ def Get_Song(track):
     return song_stats
 
 def Get_Album_Tracks(album_uri):
+    dsc_num, dur, explicit, url, href, id, local, name, number, uri = [], [], [], [], [], [], [], [], [], []
     album_TrackList = []
     album_tracks_complete = sp.album_tracks(album_uri)
     all_tracks = album_tracks_complete['items']
     i = 0
     while i < len(all_tracks):
+        dsc_num.append(all_tracks[i]['disc_number'])
+        dur.append(all_tracks[i]['duration_ms'])
+        explicit.append(all_tracks[i]['explicit'])
+        url.append(all_tracks[i]['external_urls']['spotify'])
+        href.append(all_tracks[i]['href'])
+        id.append(all_tracks[i]['id'])
+        local.append(all_tracks[i]['is_local'])
+        name.append(all_tracks[i]['name'])
+        number.append(all_tracks[i]['track_number'])
+        uri.append(all_tracks[i]['uri'])
         track_stats = track()
         track_stats.disc_number = all_tracks[i]['disc_number']
         track_stats.duration_ms = all_tracks[i]['duration_ms']
@@ -201,7 +243,8 @@ def Get_Album_Tracks(album_uri):
         album_TrackList.append(track_stats)
         del track_stats
         i += 1
-    return album_TrackList
+    df = pd.DataFrame({'Disc Number':dsc_num, 'Duration':dur, 'Explicit':explicit, 'Track URL':url, 'Spotify HREF':href, 'Spotify ID':id, 'Local':local, 'Track Number':number, 'Spotify URI':uri,})
+    return df, album_TrackList
 
 def Album_Generator(artist_ID):
     recommended_albums_list = []
@@ -248,6 +291,20 @@ def Song_Features(single):
     track_stats.valence = features[0]['valence']
     return track_stats
 
+class Rec_Song:
+    def __init__(self):
+        self.artist_name = ''
+        self.album_url = ''
+        self.album_id = ''
+        self.album_title = ''
+        self.album_uri = ''
+        self.song_url = ''
+        self.song_id = ''
+        self.song_name = ''
+        self.song_popularity = 0
+        self.track_number = 0
+        self.song_uri = ''
+   
 def Song_Generator(artist_ID):
     recommended_songs_list = []
     recommended_songs = sp.recommendations(seed_artists = [artist_ID])
@@ -276,6 +333,65 @@ def normalize(df):
         result[feature_name] = (df[feature_name] - min_value) / (max_value - min_value)
     return result
 
+
+# 1 CHOOSE ARTIST AND PRINT CLASS
+# ````````````````````````````````
+
+# PUT CREDENTIALS HERE!
+cid = ''   
+secret = ''
+
+artist_name = ''
+artist_stats = artist(artist_name)
+artist_stats.Get_Artist()
+
+# print_class(artist_stats)   # Remove comment to print artist profile
+
+# 2 GET ALL ALBUMS
+# ````````````````````````````````
+
+ #df_albums, Albums = Get_Albums(artist_stats.uri, 'album')
+# View_All(Albums)   # Remove comment to print all albums.  Choose index for album of choice. 
+
+# 3 GET SONG (all of step 4 must be commented to run step 3...for now)
+# ````````````````````````````````
+
+ #track = Get_Song('Faithfully')
+# print_class(track)   # Remove comment to print song profile
+
+# 4 GET ALL SONGS FROM AN ALBUM (all of step 3 must be commented to run step 4...for now)
+# ````````````````````````````````
+
+# df_tracks, Tracks = Get_Album_Tracks(Albums[0].uri)   # insert album index from step 2 here
+# View_All(Tracks)    # Remove comment to print all tracks
+
+# 5 GET SONGS AUDIO FEATURES
+# ````````````````````````````````
+
+# song_analysis = Song_Features(track.uri)
+# print_class(song_analysis)
+
+# 6 GENERATE RECOMMENDED ALBUM LIST
+# ````````````````````````````````
+
+# recommended_albums = Album_Generator(artist_stats.id)
+# for k in range(0, len(recommended_albums)):
+#     print_class(recommended_albums[k])
+#     print('\n')
+
+# 7 GENERATE RECOMMENDED SONG LIST
+# ````````````````````````````````
+
+rec_song_uris = []
+rec_song_popularity = []
+recommended_songs = Song_Generator(artist_stats.id)
+for k in range(0, len(recommended_songs)):
+    rec_song_uris.append(recommended_songs[k].song_uri)
+    rec_song_popularity.append(recommended_songs[k].song_popularity)
+    print(recommended_songs[k].song_name + '\t(' + recommended_songs[k].artist_name + ')\t' + recommended_songs[k].song_url)
+
+# 8 CAPTURE ALL SONG AUDIO FEATURES
+# ````````````````````````````````
 def plotter():
     rec_song_uris = []
     rec_song_popularity = []
@@ -283,6 +399,7 @@ def plotter():
     for k in range(0, len(recommended_songs)):
         rec_song_uris.append(recommended_songs[k].song_uri)
         rec_song_popularity.append(recommended_songs[k].song_popularity)
+
     all_song_analysis = []
     danceability, energy, instrumentalness, liveness, loudness, tempo,  = [], [], [], [], [], []
     for j in range(0, len(rec_song_uris)):
@@ -295,11 +412,14 @@ def plotter():
         loudness.append(song_analysis.loudness)
         tempo.append(song_analysis.tempo)
     df = pd.DataFrame({'Danceability':danceability, 'Energy':energy, 'Instrumentalness':instrumentalness, 'Liveness':liveness, 'Loudness':loudness, 'Tempo':tempo})
+
     df = normalize(df)
     categories = ['Dance', 'Energy', 'Instrumental', 'Liveliness', 'Loudness', 'Tempo']
     categories += categories[:1]
+
     trends = [df['Danceability'].mean(), df['Energy'].mean(), df['Instrumentalness'].mean(), df['Liveness'].mean(), df['Loudness'].mean(), df['Tempo'].mean()]
     trends += trends[:1]
+
     fig = go.Figure(
         data=[
             go.Scatterpolar(r = trends, theta=categories, fill = 'toself', name = 'Music Trends')
@@ -315,23 +435,6 @@ def plotter():
             showlegend = False
         )
     )
+
     plt_div = plot(fig, output_type='div')
     return plt_div
-
-# 1 CHOOSE ARTIST AND PRINT CLASS
-# ````````````````````````````````
-
-client, sp = None, None
-# cid = ''
-# secret = ''
-
-# artist_name = 'Journey'
-# artist_stats = artist(artist_name)
-# artist_stats.Get_Artist()
-# Albums = Get_Albums(artist_stats.uri, 'album')
-# song_name = 'Faithfully'
-# song_track = Get_Song(song_name)
-# Tracks = Get_Album_Tracks(Albums[0].uri)
-# song_analysis = Song_Features(song_track.uri)
-# recommended_albums = Album_Generator(artist_stats.id)
-# recommended_songs = Song_Generator(artist_stats.id)

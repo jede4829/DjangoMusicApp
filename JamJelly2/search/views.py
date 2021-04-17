@@ -60,7 +60,7 @@ def do_search(request):
     print("do_search")
     if request.method == "POST":
         artist_name = request.POST["artist"]
-        
+
         if artist_name == "" or artist_name.strip() == "":
             #raise Http404("Search cannot be empty")
             return render(request,"search/home.html",{'error':'search cannot be empty'})
@@ -82,7 +82,7 @@ def do_search(request):
     context={"method": request.method,"plot_div": plot_div, "r_name":artist_stats.spotify_name,"r_image":r_image,"r_genre":r_genres,"r_url":r_url,"r_follow":artist_stats.followers,"r_pop":artist_stats.popularity }
 
     return render(request,"search/home.html",context)
-    
+
 def do_search_song(request):
     if request.method == "POST":
         song_name = request.POST["song"]

@@ -1,62 +1,96 @@
 <html>
 <head>
-<title>Spotify Search New User Registration</title>
+  <!-- {% load static %} -->
+  <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+  </style>
+  <title>Spotify Search New User Registration</title>
 </head>
-
+<!--
 <style type="text/css">
 body {
     background-color: black;
     color: white;
 }
-
 a {
     color: green;
 }
-
 #howto {
     width:500px;
     border:1px solid white;
     padding: 10px 10px 10px 10px;
 }
-</style>
+</style> -->
 
 <body>
-<div id="title"><b>Welcome to a custom Spotify Search!</b></div>
-<div id="title"><b>New User Registration</b></div>
 
 
-<div id="howto">
-    In order to get your Spotify <code>client_id</code> and <code>client_secret</code>:
 
-    <ol>
-        <li> Create a Spotify Account.</li>
+  <div class="session_register">
 
-     <li> Go to your <a href="https://developer.spotify.com/dashboard/" target="_blank">Spotify Developer Dashboard</a></li>
+    <div class="left">
+      <?xml version="1.0" encoding="UTF-8"?>
+      <img src="/static/images/jam-icon-main.gif" alt="" style="width: 75%;">
 
-     <li> Login</li>
+    </div>
 
-     <li> Create a new app</li>
+    <form id="newuserform" method="POST" action="register/" style="background:  #fefefe; padding-left: 10px;">
+      <br>
+      <h4 style="margin: 10px;"><span>New User </span>Registration</h4>
 
-     <li> The Client ID will be displayed immediately</li>
+      In order to get your Spotify <code>client_id</code> and <code>client_secret</code>:
+      <br>
+      <ol>
+          <li> Create a Spotify Account.</li>
+       <li> Go to your <a href="https://developer.spotify.com/dashboard/" target="_blank">Spotify Developer Dashboard</a></li>
+       <li> Login</li>
+       <li> Create a new app</li>
+       <li> The Client ID will be displayed immediately</li>
+           <li> Click the "Show Client Secret" link to view the Client Secret</li>
+      </ol>
+      <br>
+      Make sure to copy and paste both into the fields here!
+      <br>
 
-         <li> Click the "Show Client Secret" link to view the Client Secret</li>
+      <div class="floating-label">
 
-    </ol>
-    Make sure to copy and paste both into the fields here!
-</div>
+        {% csrf_token %}
+        <label for="name" style="margin: 10px;">Username:</label>
+        <input placeholder="Username" type="text" name="name" id="name" value="" autocomplete="off" style="margin: 10px;">
 
-<form id="newuserform" method="POST" action="register/">
-{% csrf_token %}
-<table>
-<tr><td>Username:</td><td>      <input type="text" id="name"          name="name"          value="" /></td></tr>
-<tr><td>Password:</td><td>      <input type="password" id="password"  name="password"      value="" /></td></tr>
-<tr><td>client_id:</td><td>     <input type="text" id="client_id"     name="client_id"     value="" /></td></tr>
-<tr><td>client_secret:</td><td> <input type="text" id="client_secret" name="client_secret" value="" /></td></tr>
-<tr><td><input type="submit" id="submit" name="submit" value="Register New User" /></td></tr>
-</table>
-</form>
+      </div>
 
-<a href="/">Back to Login</a>
+      <div class="floating-label">
+
+        <label for="password" style="margin: 10px;">Password:</label>
+        <input placeholder="Password" type="password" name="password" id="password" autocomplete="off" style="margin: 10px;">
+
+      </div>
+
+      <div class="floating-label">
+
+        <label for="password" style="margin: 10px;">Client Id:</label>
+        <input placeholder="Password" type="text" name="client_id" id="client_id" autocomplete="off" style="margin: 10px;">
+
+      </div>
+
+      <div class="floating-label">
+
+        <label for="password" style="margin: 10px;">Client Secret:</label>
+        <input placeholder="Password" type="password" name="client_secret" id="client_secret" autocomplete="off" style="margin: 10px;">
+
+      </div>
+
+      <input type="submit" id="submit" name="submit" value="Register New User" style="margin-left: 25px;"/>
+
+      <a href="/">Back to Login</a>
+
+    </form>
+  </div>
+
+
+
 
 </body>
 </html>

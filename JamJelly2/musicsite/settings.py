@@ -1,5 +1,6 @@
 
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'htvgqqdfq8e(abu*yj5y5)aa@+n=6^g&sj135nokg!20sl$jwy'
@@ -74,3 +75,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static'),
+]
