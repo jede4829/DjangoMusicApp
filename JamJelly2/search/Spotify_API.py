@@ -48,7 +48,7 @@ class artist:
         global client
         global sp
         if client == None and sp == None:
-            client = SpotifyClientCredentials(client_id = cid, client_secret = secret)
+            client = SpotifyClientCredentials(client_id = self.cid, client_secret = self.secret)
             sp = spotipy.Spotify(client_credentials_manager = client)
         results = sp.search(q='artist:' + self.input_name, type='artist')
         List_of_Artists = results['artists']
@@ -276,7 +276,7 @@ def normalize(df):
         result[feature_name] = (df[feature_name] - min_value) / (max_value - min_value)
     return result
 
-def plotter():
+def plotter(artist_stats):
     rec_song_uris = []
     rec_song_popularity = []
     recommended_songs = Song_Generator(artist_stats.id)
