@@ -8,20 +8,6 @@
 </head>
 <body>
 
-  <script type="text/javascript">
-    document.getElementById('selector').onchange = function() {
-      alert("selector changed");
-      var newvalue = selector.value;
-      if(newvalue=="Artist"){
-        var newaction = "http://127.0.0.1:8000/do_search/";
-      } else {
-        var newaction = "http://127.0.0.1:8000/do_search_song/";
-      };
-      document.getElementById('search_form').action = newaction;
-    };
-  </script>
-
-
 <div class="navbar">
 
   <div id = "home_name">
@@ -35,7 +21,7 @@
     </script>
   {% endif %}
 
-  <div class="container-search">
+  <!-- <div class="container-search">
     <form action="http://127.0.0.1:8000/do_search/" method="POST">
         {% csrf_token %}
         <input type="text" name="artist" placeholder="Search by Artist..."/>
@@ -43,8 +29,52 @@
         <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
         <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
     </form>
-  </div>
+  </div> -->
 
+  <div class="container-search">
+
+    <!-- <div class="toggle-text">
+      <p>Search By: </p>
+    </div> -->
+
+    <div class="toggle">
+      <input type="radio" name="searchBy" value="artist" id="searchArtist" checked="checked" onclick="hideShow()" />
+      <label for="searchArtist">Artist</label>
+      <input type="radio" name="searchBy" value="song" id="searchSong" onclick="hideShow()" />
+      <label for="searchSong">Song</label>
+    </div>
+
+    <!-- <div class="toggle-text">
+      <p>For This: </p>
+    </div> -->
+
+    <div id="byArtist">
+      <form id="search_form_artist" action = "http://127.0.0.1:8000/do_search/" method="POST">
+          {% csrf_token %}
+          <input type="text" name="artist" placeholder="Search by Artist..."/>
+          <!-- <select name="selector" id="selector">
+            <option value="Song">Song</option>
+            <option value="Artist">Artist</option>
+          </select> -->
+          <input type="submit" value="🎵 Artist"/>
+          <!-- <input type="submit" value="🎵" onclick="searchFunction()"/> -->
+          <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
+          <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
+      </form>
+    </div>
+
+    <div id="bySong">
+
+      <form id="search_form_song" action = "http://127.0.0.1:8000/do_search_song/" method="POST">
+          {% csrf_token %}
+          <input type="text" name="artist" placeholder="Search by Song..."/>
+          <input type="submit" value="🎵 Song" />
+          <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
+          <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
+      </form>
+    </div>
+
+  </div>
 
 
   <div class="dropdown">
@@ -102,4 +132,43 @@
 {% endif %}
 
 </body>
+
+<script type="text/javascript">
+
+  // function searchFunction(){
+  //   var newvalue = document.getElementById('selector').value;
+  //   if(newvalue=="Artist"){
+  //     alert("ARTIST");
+  //     var newaction = "http://127.0.0.1:8000/do_search/";
+  //   } else {
+  //     alert("NOT ARTIST (SONG)");
+  //     var newaction = "http://127.0.0.1:8000/do_search_song/";
+  //   };
+  //   document.getElementById('search_form').action = newaction;
+  //   document.getElementById('search_form').submit();
+  // };
+
+  function hideShow() {
+    var bySongVar = document.getElementById("bySong");
+    var byArtistVar = document.getElementById("byArtist");
+    var bySongCheck = document.getElementById("searchSong").checked;
+    var byArtistCheck = document.getElementById("searchArtist").checked;
+    bySongVar.style.display = "none";
+    byArtistVar.style.display = "none";
+    if (bySongCheck === true && byArtistCheck == false) {
+      bySongVar.style.display = "block";
+      byArtistVar.style.display = "none";
+    } else if (bySongCheck === false && byArtistCheck == true) {
+      bySongVar.style.display = "none";
+      byArtistVar.style.display = "block";
+    } else {
+      alert("radio button error T/T or F/F");
+    };
+  };
+
+  hideShow();
+
+
+</script>
+
 </html>
