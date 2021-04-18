@@ -11,7 +11,6 @@
 <div class="navbar">
 
   <div id = "home_name">
-    <!-- <img src="/static/images/jam-icon-small.gif" alt="" style="width: 20%;"> -->
     <a href="home">Jam Jelly</a>
   </div>
 
@@ -20,16 +19,6 @@
     alert("Error: Search Cannot Be Empty");
     </script>
   {% endif %}
-
-  <!-- <div class="container-search">
-    <form action="http://127.0.0.1:8000/do_search/" method="POST">
-        {% csrf_token %}
-        <input type="text" name="artist" placeholder="Search by Artist..."/>
-        <input type="submit" value="🎵" />
-        <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
-        <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
-    </form>
-  </div> -->
 
   <div class="container-search">
 
@@ -52,12 +41,7 @@
       <form id="search_form_artist" action = "http://127.0.0.1:8000/do_search/" method="POST">
           {% csrf_token %}
           <input type="text" name="artist" placeholder="Search by Artist..."/>
-          <!-- <select name="selector" id="selector">
-            <option value="Song">Song</option>
-            <option value="Artist">Artist</option>
-          </select> -->
           <input type="submit" value="🎵 Artist"/>
-          <!-- <input type="submit" value="🎵" onclick="searchFunction()"/> -->
           <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
           <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
       </form>
@@ -98,6 +82,10 @@
 <br>
 
 {% if method == "POST" %}
+<script>
+  alert("post triggered");
+</script>
+
 <div id = "container_main">
 
 <table>
@@ -134,19 +122,6 @@
 </body>
 
 <script type="text/javascript">
-
-  // function searchFunction(){
-  //   var newvalue = document.getElementById('selector').value;
-  //   if(newvalue=="Artist"){
-  //     alert("ARTIST");
-  //     var newaction = "http://127.0.0.1:8000/do_search/";
-  //   } else {
-  //     alert("NOT ARTIST (SONG)");
-  //     var newaction = "http://127.0.0.1:8000/do_search_song/";
-  //   };
-  //   document.getElementById('search_form').action = newaction;
-  //   document.getElementById('search_form').submit();
-  // };
 
   function hideShow() {
     var bySongVar = document.getElementById("bySong");

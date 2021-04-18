@@ -85,15 +85,19 @@ def do_search(request):
 
 def do_search_song(request):
     if request.method == "POST":
-        song_name = request.POST["song"]
+        # song_name = request.POST["song"]
+        song_name = request.POST["artist"]
         client_id = request.POST["client_id"]
         client_secret = request.POST["client_secret"]
         track_stats = Spotify_API.Get_Song(song_name, client_id, client_secret)
+        # artist_stats = Spotify_API.artist(artist_name, client_id, client_secret)
+        # track_stats = Spotify_API.song(song_name, client_id, client_secret)
+        # track_stats.Get_Song()
     else:
         raise Http404("Invalid method for page")
 
-    context = {"method": request.method, "r_name":track_stats.artist_name, "r_album":track_stats.album_url,  "r_album_title":track_stats.album_title,
-               "r_song_url":track_stats.song_url, "r_song_name":track_stats.song_name, "r_song_popularity":track_stats.song_popularity, "r_song_track_number":track_stats.song_track_number}
+    context = {"method": request.method, "r_name":track_stats.artist_name, "r_url":track_stats.track_url,  "r_album_title":track_stats.album_title,
+               "r_genre":track_stats.track_name, "r_pop":track_stats.track_popularity, "r_follow":track_stats.track_number}
 
     return render(request, "search/home.html", context)  # RETURN INFORMATION TO DIFFERENT PAGE THAN home.html WHICH IS FOR THE ARTIST.
 

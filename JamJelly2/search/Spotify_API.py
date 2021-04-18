@@ -72,6 +72,7 @@ class song:
         self.track_popularity = 0
         self.track_number = 0
         self.uri = ''
+        self.track_name = ''
 
 class track:
     def __init__(self):
@@ -156,7 +157,7 @@ def Get_Albums(uri, type):
         k += 1
     return album_ClassList
 
-def Get_Song(track):
+def Get_Song(track, cid, secret):
     global client
     global sp
     if client == None and sp == None:
