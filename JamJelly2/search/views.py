@@ -101,6 +101,40 @@ def do_search_song(request):
 
     return render(request, "search/home.html", context)  # RETURN INFORMATION TO DIFFERENT PAGE THAN home.html WHICH IS FOR THE ARTIST.
 
+def do_recommended_songs(request):
+    artist_name = request.POST["artist"]
+    if artist_name == "" or artist_name.strip() == "":
+        return render(request,"search/home.html",{'error':'search cannot be empty'})
+    client_id = request.POST["client_id"]
+    client_secret = request.POST["client_secret"]
+    artist_stats = Spotify_API.artist(artist_name, client_id, client_secret)
+    artist_stats.Get_Artist()
+    recommended_songs = Spotify_API.Song_Generator(artist_stats.id)
+    song1 = recommended_songs[0]
+    song2 = recommended_songs[1]
+    song3 = recommended_songs[2]
+    song4 = recommended_songs[3]
+    song5 = recommended_songs[4]
+    context = {"method": request.method, "1_song":song1, "2_song":song2, "3_song":song3, "4_song":song4, "5_song":song5}
+    return render(request, "search/home.html", context)
+
+def do_recommended_albums(request):
+    artist_name = request.POST["artist"]
+    if artist_name == "" or artist_name.strip() == "":
+        return render(request,"search/home.html",{'error':'search cannot be empty'})
+    client_id = request.POST["client_id"]
+    client_secret = request.POST["client_secret"]
+    artist_stats = Spotify_API.artist(artist_name, client_id, client_secret)
+    artist_stats.Get_Artist()
+    recommended_albums = Spotify_API.Album_Generator(artist_stats.id)
+    album1 = recommended_albums[0]
+    album2 = recommended_albums[1]
+    album3 = recommended_albums[2]
+    album4 = recommended_albums[3]
+    album5 = recommended_albums[4]
+    context = {"method": request.method, "1_album":album1, "2_album":album2, "3_album":album3, "4_album":album4, "5_album":album5}
+    return render(request, "search/home.html", context)
+
 def register(request):
     if request.method=="POST":
         username=request.POST["name"]

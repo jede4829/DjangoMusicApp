@@ -5,7 +5,10 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'htvgqqdfq8e(abu*yj5y5)aa@+n=6^g&sj135nokg!20sl$jwy'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    'mysterious-cliffs-00315.herokuapp.com'
+]
 
 INSTALLED_APPS = [
     'search.apps.searchConfig',
@@ -25,6 +28,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'musicsite.urls'
@@ -76,6 +80,10 @@ USE_L10N = True
 USE_TZ = True
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static'),
-]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR,'static'),
+# ]
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
