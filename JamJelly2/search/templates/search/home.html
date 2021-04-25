@@ -82,37 +82,96 @@
 <br>
 
 {% if method == "POST" %}
-<script>
+<!-- <script>
   alert("post triggered");
-</script>
+</script> -->
 
 <div id = "container_main">
 
-<table>
+  <div id = "byArtist_main">
+    <table>
 
-  <col>
-  <tr>
-      <th rowspan="4" scope="rowgroup" style="width:25%"><img src={{r_image}} alt="Artist Image Alt Txt" style="height:100px;"></th>
-  </tr>
-  <tr>
-    <th scope="col" style="width:25%">{{r_name}}</th>
-    <th scope="col" style="width:25%">{{r_follow}} Followers</th>
-    <th scope="col" style="width:25%">Popularity: {{r_pop}}</th>
-  </tr>
-  <tr>
-    <th colspan="3" scope="colgroup" style="width:25%">Genres: {{r_genre}}</th>
-  </tr>
-  <tr>
-    <th colspan="3" scope="colgroup" style="width:25%"><a href="{{r_url}}" target="_blank">{{r_url}}</a></th>
-  </tr>
+      <col>
+      <tr>
+          <th rowspan="4" scope="rowgroup" style="width:25%"><img src={{r_image}} alt="Artist Image Alt Txt" style="height:100px;"></th>
+      </tr>
+      <tr>
+        <th scope="col" style="width:25%">{{r_name}}</th>
+        <th scope="col" style="width:25%">{{r_follow}} Followers</th>
+        <th scope="col" style="width:25%">Popularity: {{r_pop}}</th>
+      </tr>
+      <tr>
+        <th colspan="3" scope="colgroup" style="width:25%">Genres: {{r_genre}}</th>
+      </tr>
+      <tr>
+        <th colspan="3" scope="colgroup" style="width:25%"><a href="{{r_url}}" target="_blank">{{r_url}}</a></th>
+      </tr>
 
-</table>
+    </table>
 
-  <div>
+    <div>
 
-  {% autoescape off %}
-  {{ plot_div }}
-  {% endautoescape %}
+    {% autoescape off %}
+    {{ plot_div }}
+    {% endautoescape %}
+
+    </div>
+
+  </div>
+
+  <div id = "bySong_main">
+    <table>
+
+      <col>
+      <tr>
+          <th rowspan="4" scope="rowgroup" style="width:25%"><img src={{r_image}} alt="Artist Image Alt Txt" style="height:100px;"></th>
+      </tr>
+      <tr>
+        <th scope="col" style="width:25%">{{r_song_name}}</th>
+        <th scope="col" style="width:25%">{{r_album_title}} Album</th>
+        <th scope="col" style="width:25%">By {{r_artist_name}}</th>
+      </tr>
+      <tr>
+        <th scope="col" style="width:25%">Date: {{r_date}}</th>
+        <th scope="col" style="width:25%">Length: {{r_duration}} min</th>
+        <th scope="col" style="width:25%">Popularity: {{r_pop}}</th>
+      </tr>
+      <tr>
+        <th colspan="3" scope="colgroup" style="width:25%"><a href="{{r_url}}" target="_blank">{{r_url}}</a></th>
+      </tr>
+
+    </table>
+  </div>
+
+  <div id = "container_recommendations">
+
+    <div id = "byArtist_rec">
+    </div>
+
+    <div id = "bySong_rec">
+      <table>
+        <tr>
+          <th scope="col" style="width:30%">1: {{1_song}}</th>
+          <th scope="col" style="width:70%"><a href="{{1_song_url}}" target="_blank">{{r_url}}</a></th>
+        </tr>
+        <tr>
+          <th scope="col" style="width:30%">2: {{2_song}}</th>
+          <th scope="col" style="width:70%"><a href="{{2_song_url}}" target="_blank">{{r_url}}</a></th>
+        </tr>
+        <tr>
+          <th scope="col" style="width:30%">3: {{3_song}}</th>
+          <th scope="col" style="width:70%"><a href="{{3_song_url}}" target="_blank">{{r_url}}</a></th>
+        </tr>
+        <tr>
+          <th scope="col" style="width:30%">4: {{4_song}}</th>
+          <th scope="col" style="width:70%"><a href="{{4_song_url}}" target="_blank">{{r_url}}</a></th>
+        </tr>
+        <tr>
+          <th scope="col" style="width:30%">5: {{5_song}}</th>
+          <th scope="col" style="width:70%"><a href="{{5_song_url}}" target="_blank">{{r_url}}</a></th>
+        </tr>
+      </table>
+    </div>
 
   </div>
 
@@ -126,16 +185,24 @@
   function hideShow() {
     var bySongVar = document.getElementById("bySong");
     var byArtistVar = document.getElementById("byArtist");
+    var bySongMain = document.getElementById("bySong_main");
+    var byArtistMain = document.getElementById("byArtist_main");
     var bySongCheck = document.getElementById("searchSong").checked;
     var byArtistCheck = document.getElementById("searchArtist").checked;
     bySongVar.style.display = "none";
     byArtistVar.style.display = "none";
+    // bySongMain.style.display = "none";
+    // byArtistMain.style.display = "none";
     if (bySongCheck === true && byArtistCheck == false) {
       bySongVar.style.display = "block";
       byArtistVar.style.display = "none";
+      bySongMain.style.display = "block";
+      byArtistMain.style.display = "none";
     } else if (bySongCheck === false && byArtistCheck == true) {
       bySongVar.style.display = "none";
       byArtistVar.style.display = "block";
+      bySongMain.style.display = "none";
+      byArtistMain.style.display = "block";
     } else {
       alert("radio button error T/T or F/F");
     };

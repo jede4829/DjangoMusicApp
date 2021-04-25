@@ -117,6 +117,12 @@
   transform: translate(-50%, -50%);
 }
 
+#container_recommendations{
+  width: 600px;
+  height: 200px;
+  overflow:auto;
+}
+
 
 /* ------------------------------------------------------------------------- */
 /* -------- LOGIN CSS - https://freefrontend.com/css-login-forms/ ---------- */

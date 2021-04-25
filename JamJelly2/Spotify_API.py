@@ -17,7 +17,7 @@ def print_class(instance):
     for k in class_var:
         keys.append(k)
     for j in keys:
-        if type(class_var) is not str: 
+        if type(class_var) is not str:
             print(j + ' :    ' + str(class_var[j]))
         else:
             print(j + ' :    ' + class_var[j])
@@ -29,11 +29,11 @@ def get_str_class(instance):
     for k in class_var:
         keys.append(k)
     for j in keys:
-        if type(class_var) is not str: 
+        if type(class_var) is not str:
             r += j + ' :    ' + str(class_var[j]) + "\n"
         else:
             r += j + ' :    ' + str(class_var[j]) + "\n"
-    return r 
+    return r
 
 def print_json(object):
     print(json.dumps(object, sort_keys = True, indent = 4))
@@ -82,7 +82,7 @@ class artist:
 
     def Get_Artist(self):
         global client
-        global sp 
+        global sp
         if client==None and sp==None:
             client = SpotifyClientCredentials(client_id=cid, client_secret=secret)
             sp = spotipy.Spotify(client_credentials_manager=client)
@@ -189,7 +189,7 @@ def Get_Albums(uri, type):
 
 def Get_Song(track):
     global client
-    global sp 
+    global sp
     if client == None and sp == None:
         client = SpotifyClientCredentials(client_id = cid, client_secret = secret)
         sp = spotipy.Spotify(client_credentials_manager = client)
@@ -304,7 +304,7 @@ class Rec_Song:
         self.song_popularity = 0
         self.track_number = 0
         self.song_uri = ''
-   
+
 def Song_Generator(artist_ID):
     recommended_songs_list = []
     recommended_songs = sp.recommendations(seed_artists = [artist_ID])
@@ -338,7 +338,7 @@ def normalize(df):
 # ````````````````````````````````
 
 # PUT CREDENTIALS HERE!
-cid = ''   
+cid = ''
 secret = ''
 
 artist_name = ''
@@ -351,7 +351,7 @@ artist_stats.Get_Artist()
 # ````````````````````````````````
 
  #df_albums, Albums = Get_Albums(artist_stats.uri, 'album')
-# View_All(Albums)   # Remove comment to print all albums.  Choose index for album of choice. 
+# View_All(Albums)   # Remove comment to print all albums.  Choose index for album of choice.
 
 # 3 GET SONG (all of step 4 must be commented to run step 3...for now)
 # ````````````````````````````````

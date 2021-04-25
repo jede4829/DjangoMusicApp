@@ -90,14 +90,26 @@ def do_search_song(request):
         client_id = request.POST["client_id"]
         client_secret = request.POST["client_secret"]
         track_stats = Spotify_API.Get_Song(song_name, client_id, client_secret)
-        # artist_stats = Spotify_API.artist(artist_name, client_id, client_secret)
-        # track_stats = Spotify_API.song(song_name, client_id, client_secret)
-        # track_stats.Get_Song()
+        artist_stats = Spotify_API.artist(track_stats.artist_name, client_id, client_secret)
+        artist_stats.Get_Artist()
+        r_image = str(artist_stats.images[0]).split("'url': '",1)[1].split("', '",1)[0]
+        # ------- Recommended Songs -------
+        artist_stats = Spotify_API.artist(track_stats.artist_name, client_id, client_secret)
+        artist_stats.Get_Artist()
+        recommended_songs = Spotify_API.Song_Generator(artist_stats.id)
+        song1 = recommended_songs[0]
+        song2 = recommended_songs[1]
+        song3 = recommended_songs[2]
+        song4 = recommended_songs[3]
+        song5 = recommended_songs[4]
+
     else:
         raise Http404("Invalid method for page")
 
-    context = {"method": request.method, "r_name":track_stats.artist_name, "r_url":track_stats.track_url,  "r_album_title":track_stats.album_title,
-               "r_genre":track_stats.track_name, "r_pop":track_stats.track_popularity, "r_follow":track_stats.track_number}
+    context = {"method": request.method, "r_image":r_image, "r_song_name":song_name, "r_artist_name":track_stats.artist_name, "r_url":track_stats.track_url,  "r_album_title":track_stats.album_title,
+               "r_date":track_stats.release_date, "r_pop":track_stats.track_popularity, "r_duration":(track_stats.duration_ms/60000),
+               "1_song":song1.song_name, "2_song":song2.song_name, "3_song":song3.song_name, "4_song":song4.song_name, "5_song":song5.song_name,
+               "1_song_url":song1.song_url, "2_song_url":song2.song_url, "3_song_url":song3.song_url, "4_song_url":song4.song_url, "5_song_url":song5.song_url}
 
     return render(request, "search/home.html", context)  # RETURN INFORMATION TO DIFFERENT PAGE THAN home.html WHICH IS FOR THE ARTIST.
 

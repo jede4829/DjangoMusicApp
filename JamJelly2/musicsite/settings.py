@@ -7,7 +7,8 @@ SECRET_KEY = 'htvgqqdfq8e(abu*yj5y5)aa@+n=6^g&sj135nokg!20sl$jwy'
 DEBUG = True
 ALLOWED_HOSTS = [
     '0.0.0.0',
-    'mysterious-cliffs-00315.herokuapp.com'
+    'mysterious-cliffs-00315.herokuapp.com',
+    '127.0.0.1'
 ]
 
 INSTALLED_APPS = [
@@ -80,10 +81,13 @@ USE_L10N = True
 USE_TZ = True
 STATIC_URL = '/static/'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# ---------- When running locally use this ----------
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR,'static'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static'),
+]
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+# ---------- When running remotely uncommet below, comment the above ----------
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_ROOT = os.path.join(BASE_DIR,'static')
