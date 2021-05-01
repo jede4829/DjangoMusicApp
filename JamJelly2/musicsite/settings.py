@@ -1,8 +1,17 @@
 
 from pathlib import Path
 import os
+import dj_database_url
+import dotenv
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+#NEW FOR HEROKU
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+	dotenv.load_dotenv(dotenv_file)
+
+
 SECRET_KEY = 'htvgqqdfq8e(abu*yj5y5)aa@+n=6^g&sj135nokg!20sl$jwy'
 DEBUG = True
 ALLOWED_HOSTS = [
@@ -52,12 +61,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'musicsite.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
+#NEW FOR HEROKU
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -83,11 +97,15 @@ STATIC_URL = '/static/'
 
 # ---------- When running locally use this ----------
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static'),
-]
+#STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 
 # ---------- When running remotely uncommet below, comment the above ----------
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+# This should already be in your settings.py
+django_heroku.settings(locals())
+# This is new
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)

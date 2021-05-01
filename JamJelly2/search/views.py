@@ -79,7 +79,8 @@ def do_search(request):
     plot_div = Spotify_API.plotter(artist_stats)
 
     # return render(request,"search/do_search.html",{"r_name":artist_stats.spotify_name,"r_image":r_image,"r_genre":r_genres,"r_url":r_url,"r_follow":artist_stats.followers,"r_pop":artist_stats.popularity})
-    context={"method": request.method,"plot_div": plot_div, "r_name":artist_stats.spotify_name,"r_image":r_image,"r_genre":r_genres,"r_url":r_url,"r_follow":artist_stats.followers,"r_pop":artist_stats.popularity }
+    context={"method": request.method,"plot_div": plot_div, "r_name":artist_stats.spotify_name,"r_image":r_image,"r_genre":r_genres,"r_url":r_url,"r_follow":artist_stats.followers,"r_pop":artist_stats.popularity,
+    "r_clicked":"artist" }
 
     return render(request,"search/home.html",context)
 
@@ -109,7 +110,8 @@ def do_search_song(request):
     context = {"method": request.method, "r_image":r_image, "r_song_name":song_name, "r_artist_name":track_stats.artist_name, "r_url":track_stats.track_url,  "r_album_title":track_stats.album_title,
                "r_date":track_stats.release_date, "r_pop":track_stats.track_popularity, "r_duration":(track_stats.duration_ms/60000),
                "1_song":song1.song_name, "2_song":song2.song_name, "3_song":song3.song_name, "4_song":song4.song_name, "5_song":song5.song_name,
-               "1_song_url":song1.song_url, "2_song_url":song2.song_url, "3_song_url":song3.song_url, "4_song_url":song4.song_url, "5_song_url":song5.song_url}
+               "1_song_url":song1.song_url, "2_song_url":song2.song_url, "3_song_url":song3.song_url, "4_song_url":song4.song_url, "5_song_url":song5.song_url,
+               "r_clicked":"song"}
 
     return render(request, "search/home.html", context)  # RETURN INFORMATION TO DIFFERENT PAGE THAN home.html WHICH IS FOR THE ARTIST.
 
