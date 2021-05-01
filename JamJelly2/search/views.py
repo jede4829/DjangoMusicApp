@@ -10,9 +10,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from . import Spotify_API
 
-def add(request):
-    val = str(request.POST["forminfo"])   ###  INSERT SPOTIFY API HERE
-    return render(request,"search/output.html",{"output":val})
+# def add(request):
+#     val = str(request.POST["forminfo"])   ###  INSERT SPOTIFY API HERE
+#     return render(request,"search/output.html",{"output":val})
 
 def index(request):
     return render(request, "search/index.html", {})
@@ -36,7 +36,7 @@ def do_login(request):
         password=request.POST["password"]
 
         print(f"username: [{username}]")
-        print(f"password: [{password}]")
+        print(f"password: [{password}]") # print(f"cid: [{cid}]")
 
         user = authenticate(request, username=username, password=password )
 
