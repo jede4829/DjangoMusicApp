@@ -7,12 +7,7 @@ from search.views import register
 from search.views import home
 from search.views import do_login
 from search.views import do_search
-<<<<<<< Updated upstream
 from search.views import do_search_song
-from search.views import add
-=======
-# from search.views import add
->>>>>>> Stashed changes
 from search.views import logout_view
 
 urlpatterns = [
