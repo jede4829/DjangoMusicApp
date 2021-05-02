@@ -8,21 +8,17 @@ from django.template  import loader
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-
 from . import module
 
 def add(request):
     val = str(request.POST["forminfo"])   ###  INSERT SPOTIFY API HERE
     return render(request,"search/output.html",{"output":val})
 
-
 def index(request):
     return render(request, "search/index.html", {})
 
-
 def newuser(request):
     return render(request, "search/newuser.html", {})
-
 
 def home(request):
     if request.user.is_authenticated:
@@ -32,9 +28,6 @@ def home(request):
         return render(request, "search/home.html", context)
     else:
         raise Http404("User is not logged in!")
-
-
-
 
 def do_login(request):
     if request.method=="POST":
@@ -63,22 +56,14 @@ def do_login(request):
     print("invalid method for do_login")
     raise Http404("Invalid method for page")
 
-
-
-
-
-
 def do_search(request):
     print("do_search")
     if request.method == "POST":
         artist_name = request.POST["artist"]
-        
+
         if artist_name == "" or artist_name.strip() == "":
             #raise Http404("Search cannot be empty")
             return render(request,"search/home.html",{'error':'search cannot be empty'})
-
-
-
 
         client_id = request.POST["client_id"]
         client_secret = request.POST["client_secret"]
@@ -97,7 +82,7 @@ def do_search(request):
     context={"method": request.method,"plot_div": plot_div, "r_name":artist_stats.spotify_name,"r_image":r_image,"r_genre":r_genres,"r_url":r_url,"r_follow":artist_stats.followers,"r_pop":artist_stats.popularity }
 
     return render(request,"search/home.html",context)
-    
+
 def do_search_song(request):
     if request.method == "POST":
         song_name = request.POST["song"]
@@ -181,6 +166,3 @@ def logout_view(request):
     return render(request, "search/index.html", {})
 
     # Redirect to a success page
-
-
-

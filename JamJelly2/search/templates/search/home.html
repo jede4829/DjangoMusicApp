@@ -14,6 +14,11 @@
     <a href="home">Jam Jelly</a>
   </div>
 
+  <!-- <script>
+  alert("cid: {{ user.profile.client_id }}");
+  alert("secret: {{ user.profile.client_secret }}");
+  </script> -->
+
   {% if error %}
     <script>
     alert("Error: Search Cannot Be Empty");
@@ -180,6 +185,16 @@
 
 <script type="text/javascript">
 
+  if({{r_clicked}}=="song"){
+    alert("song")
+  }else{
+    alert("first or artist")
+  };
+  
+</script>
+
+<script type="text/javascript">
+
   function hideShow() {
     var bySongVar = document.getElementById("bySong");
     var byArtistVar = document.getElementById("byArtist");
@@ -191,12 +206,12 @@
     byArtistVar.style.display = "none";
     // bySongMain.style.display = "none";
     // byArtistMain.style.display = "none";
-    if (bySongCheck === true && byArtistCheck == false) {
+    if (bySongCheck == true && byArtistCheck == false) {
       bySongVar.style.display = "block";
       byArtistVar.style.display = "none";
       bySongMain.style.display = "block";
       byArtistMain.style.display = "none";
-    } else if (bySongCheck === false && byArtistCheck == true) {
+    } else if (bySongCheck == false && byArtistCheck == true) {
       bySongVar.style.display = "none";
       byArtistVar.style.display = "block";
       bySongMain.style.display = "none";

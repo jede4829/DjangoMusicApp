@@ -184,88 +184,6 @@ Post-conditions:	A list of recommended songs classes populated with Spotify API 
 TEST CASE 5:
 -------------------------
 
-Use Case Name:		Capture acoustic characteristics of each recommended song.
-
-Description:		The Spotify API returns all the audio properties of each recommended song.
-
-Pre-conditions:		Spotify API should be able to capture the audio characteristics of each recommended song:
-
-`				`1. Validate that a dataframe was created to hold all acoustics features for every recommended song.
-
-`				`2. Dataframe should not contain any zero entries.
-
-`				`3. Dataframe should not contain any empty entries.
-
-Test steps:		Steps taken to execute recommended songs query of Spotify API.
-
-`				`1. Navigate to /JamJelly/search/test\_API.py.
-
-`				`2. Set boolean variable audio\_testing\_set = True.
-
-`				`3. Execute the command: python C:/<Local Directory Path>/JamJelly/manage.py test
-
-Expected result:	All three tests pass.
-
-Actual result:		All three tests pass.
-
-Status (Pass/Fail):	FAIL (Not implemented yet)
-
-Notes:			Spotify\_API code needs to execute to perform information retrieval from Spotify API.
-
-`				`artist = 'Halsey' # (example artist)
-
-`				`artist\_test = Spotify\_API.artist(artist)
-
-`				`NOT IMPLEMENTED YET.
-
-Post-conditions:	A dataframe populated with all the acoustic features of every recommended song is created.
-
--------------------------
-TEST CASE 6:
--------------------------
-
-Use Case Name:		Perform song search.
-
-Description:		Search Spotify for information for a song input by the user.
-
-Pre-conditions:		Spotify API should be able to show the user who performed a song:
-
-`				`1. Validate artist\_ID.
-
-`				`2. Validate song\_ID.
-
-`				`3. URL to searched song is valid.
-
-`				`4. URI to searched song is valid
-
-Test steps:		Steps taken to execute recommended songs query of Spotify API.
-
-`				`1. Navigate to /JamJelly/search/test\_API.py.
-
-`				`2. Set boolean variable # song\_search\_test = True.
-
-`				`3. Execute the command: python C:/<Local Directory Path>/JamJelly/manage.py test
-
-Expected result:	All four tests pass.
-
-Actual result:		All four tests pass.
-
-Status (Pass/Fail):	FAIL (Not implemented yet)
-
-Notes:			Spotify\_API code needs to execute to perform information retrieval from Spotify API.
-
-`				`artist = 'Halsey' # (example artist)
-
-`				`artist\_test = Spotify\_API.artist(artist)
-
-`				`NOT IMPLEMENTED YET.
-
-Post-conditions:	User is given artist information for searched song.
-
--------------------------
-TEST CASE 7:
--------------------------
-
 Use Case Name:		Verify JamJelly site functionality.
 
 Description:		Perform basic checks into site functions (login, create new user, search for song, etc.).
@@ -307,7 +225,7 @@ Notes:			Import the following:
 Post-conditions:	All site functions confirmed to work properly.
 
 -------------------------
-TEST CASE 8:
+TEST CASE 6:
 -------------------------
 
 Use Case Name:		Site user login and authentication.

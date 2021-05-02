@@ -8,14 +8,11 @@ artist_test.Get_Artist()
 albums_test = Spotify_API.Get_Albums(artist_test.uri, 'album')
 rec_albums_test = Spotify_API.Album_Generator(artist_test.id)
 rec_songs_test = Spotify_API.Song_Generator(artist_test.id)
-# audio_test = Spotify_API
 
 artist_testing_set = True
 album_testing_set = True
 rec_album_testing_set = True
 rec_songs_testing_set = True
-# audio_testing_set = False
-# song_search_test = False
 
 class API_Test(TestCase):
 
@@ -161,5 +158,3 @@ class API_Test(TestCase):
 			for k in range(0, len(rec_songs_test)):
 				if rec_songs_test[k].song_id not in rec_songs_test[k].song_uri:
 					self.assertFalse(rec_songs_test[k])
-
-	# if audio_testing_set:

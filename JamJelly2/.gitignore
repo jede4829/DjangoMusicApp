@@ -8,3 +8,4 @@ __pycache__/
 # Environment Variables
 envname/
 e2/
+.env
