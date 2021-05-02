@@ -1,24 +1,22 @@
 .navbar {
   overflow: hidden;
   background-color: #686868;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
   padding-top: 10px;
 }
 
 .navbar a {
-  text-align: left;
-  font-size: 16px;
+  font-size: 20px;
   color: purple;
   font-family: 'Pacifico', cursive !important;
-  padding-left: 10px;
-  padding-right: 0px;
+  text-decoration: none;
 
 }
 
 #home_name {
-  height: 0px;
-  padding-left: 10px;
-  padding-right: 0px;
+  float: left;
+  margin-top: 10px;
+  margin-left: 5px;
 }
 
 .navbar .dropdown {
@@ -27,12 +25,13 @@
 }
 
 .navbar .dropdown .dropbtn {
-  font-size: 16px;
+  font-size: 20px;
   border: none;
   outline: none;
   color: purple;
   background-color: inherit;
   font-family: 'Pacifico', cursive !important;
+  margin-top: 10px;
 
 }
 
@@ -58,13 +57,6 @@
   background: #ccc;
 }
 
-/* #bySong {
-  display = "none";
-}
-
-#byArtist{
-  display = "none";
-} */
 
 .navbar input[type=text] {
 
@@ -124,9 +116,6 @@
 }
 
 
-/* ------------------------------------------------------------------------- */
-/* -------- LOGIN CSS - https://freefrontend.com/css-login-forms/ ---------- */
-/* ------------------------------------------------------------------------- */
 
 * {
   font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
@@ -134,15 +123,8 @@
   margin:  0;
 }
 
-/* $primary: rgb(182,157,230); */
 
 html {
-  /* height:  100vh;
-  width:  100vw;
-  margin:  0 0;
-  display:  flex;
-  align-items:  flex-start;
-  justify-content:  flex-start; */
   background-color:  #dddae0;
 }
 
@@ -245,46 +227,23 @@ $displacement:  3px;
 
 img {
   -webkit-filter: drop-shadow(5px 5px 5px #000);
-filter: drop-shadow(5px 5px 5px #000);
+  filter: drop-shadow(5px 5px 5px #000);
 }
 
-.toggle-text {
-  box-sizing: border-box;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  display: inline-block;
-  /* width: 100px; */
-  float: left;
-  padding-left: 20%;
-}
 
 .toggle {
-  box-sizing: border-box;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  display: inline-block;
-  /* width: 100px; */
-  float: left;
-  padding-left: 35%;
+  float: none;
+  padding-bottom: 10px;
 }
+
 .toggle input {
   width: 0;
   height: 0;
-  position: absolute;
-  left: -9999px;
 }
+
 .toggle input + label {
-  margin: 0;
-  box-sizing: border-box;
-  position: relative;
-  display: inline-block;
   border: solid 1px #ddd;
   background-color: #fff;
-  text-align: center;
   box-shadow: 0 0 0 rgba(255, 255, 255, 0);
   transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
 }
@@ -304,7 +263,6 @@ filter: drop-shadow(5px 5px 5px #000);
   color: #fff;
   box-shadow: 0 0 10px rgba(102, 179, 251, .5);
   border-color: #4b9dea;
-  z-index: 1;
 }
 .toggle input:focus + label {
   outline: dotted 1px #ccc;

@@ -33,14 +33,12 @@
       <label for="searchSong">Song</label>
     </div>
 
-    <!-- <div class="toggle-text">
-      <p>For This: </p>
-    </div> -->
+
 
     <div id="byArtist">
       <form id="search_form_artist" action = "http://127.0.0.1:8000/do_search/" method="POST">
           {% csrf_token %}
-          <input type="text" name="artist" placeholder="Search by Artist..."/>
+          <input type="text" name="artist" placeholder="Music that Sticks!..."/>
           <input type="submit" value="🎵 Artist"/>
           <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
           <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
@@ -51,7 +49,7 @@
 
       <form id="search_form_song" action = "http://127.0.0.1:8000/do_search_song/" method="POST">
           {% csrf_token %}
-          <input type="text" name="artist" placeholder="Search by Song..."/>
+          <input type="text" name="artist" placeholder="Music that Sticks!..."/>
           <input type="submit" value="🎵 Song" />
           <input type="hidden" value="{{ user.profile.client_id }}" name="client_id" />
           <input type="hidden" value="{{ user.profile.client_secret }}" name="client_secret" />
