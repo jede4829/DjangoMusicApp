@@ -1,24 +1,21 @@
 
 from pathlib import Path
 import os
-import dj_database_url
-import dotenv
-import django_heroku
+import dj_database_url ## Heroku
+import dotenv ## Heroku
+import django_heroku ## Heroku
 
+BASE_DIR_ONE = Path(__file__).resolve().parent.parent ## Ignored - Heroku - Breaks CSS - DM - DM2
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-#NEW FOR HEROKU
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-	dotenv.load_dotenv(dotenv_file)
 
 
 SECRET_KEY = 'htvgqqdfq8e(abu*yj5y5)aa@+n=6^g&sj135nokg!20sl$jwy'
 DEBUG = True
 ALLOWED_HOSTS = [
-    '0.0.0.0',
-    'mysterious-cliffs-00315.herokuapp.com',
-    '127.0.0.1'
+    '0.0.0.0', ## Heroku
+    'jamjelly.herokuapp.com', ## Heroku
+    '127.0.0.1' ## Heroku
 ]
 
 INSTALLED_APPS = [
@@ -33,16 +30,18 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware', ## Heroku
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'musicsite.urls'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' ## Heroku
 
 TEMPLATES = [
     {
@@ -62,17 +61,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'musicsite.wsgi.application'
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-
-#NEW FOR HEROKU
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR_ONE / 'db.sqlite3', # - DM2
+    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -94,19 +88,15 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__)) ## Heroku - Breaks CSS
 STATIC_URL = '/static/'
 
-# ---------- When running locally use this ----------
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static'), ## RM Heroku - DM
+	# os.path.join(PROJECT_ROOT,'static'), ## Heroku - Breaks CSS - DM
+]
 
-#STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
-
-# ---------- When running remotely uncommet below, comment the above ----------
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
-
-# This should already be in your settings.py
-django_heroku.settings(locals())
-# This is new
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
+# STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles') ## Heroku - Medium - DM
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # - DM

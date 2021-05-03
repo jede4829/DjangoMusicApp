@@ -41,7 +41,7 @@
 
 
     <div id="byArtist">
-      <form id="search_form_artist" action = "http://127.0.0.1:8000/do_search/" method="POST">
+      <form id="search_form_artist" action = "https://jamjelly.herokuapp.com/do_search/" method="POST">
           {% csrf_token %}
           <input type="text" name="artist" placeholder="Music that Sticks!..."/>
           <input type="submit" value="🎵 Artist"/>
@@ -52,7 +52,7 @@
 
     <div id="bySong">
 
-      <form id="search_form_song" action = "http://127.0.0.1:8000/do_search_song/" method="POST">
+      <form id="search_form_song" action = "https://jamjelly.herokuapp.com/do_search_song/" method="POST">
           {% csrf_token %}
           <input type="text" name="artist" placeholder="Music that Sticks!..."/>
           <input type="submit" value="🎵 Song" />
@@ -190,7 +190,7 @@
   }else{
     alert("first or artist")
   };
-  
+
 </script>
 
 <script type="text/javascript">
