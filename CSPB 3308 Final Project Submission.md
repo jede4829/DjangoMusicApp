@@ -37,3 +37,10 @@ https://github.com/jede4829/DjangoMusicApp/tree/main/JamJelly2
 -----
 http://jamjelly.herokuapp.com/
 -----
+
+## JamJelly Demo Video
+
+-----
+https://youtu.be/O3bp4iW6CTU
+
+-----
